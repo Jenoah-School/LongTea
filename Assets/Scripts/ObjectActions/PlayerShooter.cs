@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerShooter : MonoBehaviour
 {
-    public GameObject bullet;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private AudioClip shotSound = null;
+
+    private AudioSource audioSource = null;
+
+    private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -17,16 +21,15 @@ public class PlayerShooter : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            GameObject bulletOrigin = new GameObject("bulletOrigin");
-            bulletOrigin.transform.parent = PlanetManager.instance.GetPlanet().transform;
-            bulletOrigin.transform.position = PlanetManager.instance.GetPlanet().transform.position;
-
-            bulletOrigin.transform.forward = transform.forward;
-
-            GameObject bulletClone = LeanPool.Spawn(bullet, bulletOrigin.transform, true);
+            GameObject bulletClone = LeanPool.Spawn(bulletPrefab, null, true);
             bulletClone.transform.position = transform.position + transform.forward * 2;
             bulletClone.transform.rotation = transform.rotation;
 
+            if (shotSound != null)
+            {
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.PlayOneShot(shotSound);
+            }
         }
     }
 }

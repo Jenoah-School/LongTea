@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lean.Pool;
 
 public class BulletBehaviour : MonoBehaviour
 {
-
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private AudioClip destroySound = null;
 
     void Update()
     {
@@ -17,11 +15,16 @@ public class BulletBehaviour : MonoBehaviour
 
     void Move()
     {
-        transform.parent.transform.localRotation *= Quaternion.Euler(Vector3.right * Time.deltaTime * 100);
+        transform.RotateAround(PlanetManager.instance.GetPlanet().transform.position, transform.right, moveSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //other.gameObject.SetActive(false);
+        if (destroySound != null)
+        {
+            AudioSource.PlayClipAtPoint(destroySound, transform.position);
+        }
+        LeanPool.Despawn(gameObject);
     }
 }

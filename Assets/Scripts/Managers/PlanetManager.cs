@@ -11,12 +11,15 @@ public class PlanetManager : MonoBehaviour
     public void Awake()
     {
         instance = this;
-        SetPlanet();
+        SetPlanet(GameObject.FindGameObjectWithTag("Planet"));
     }
 
-    public void SetPlanet()
+    public void SetPlanet(GameObject planet)
     {
-        currentPlanet = GameObject.Find("Planet");
+        if (planet != null)
+        {
+            currentPlanet = planet;
+        }
     }
 
     public GameObject GetPlanet()

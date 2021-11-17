@@ -4,33 +4,20 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public Rigidbody rb;
+    [SerializeField] private LayerMask planetLayer;
+    [SerializeField] float speed = 10f;
 
-    Vector3 downdirection;
+    private Rigidbody rb;
 
-    Vector3 moveDirection;
-    int speed = 10;
-
-    public LayerMask planetLayer;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        downdirection = Vector3.Normalize(GameObject.Find("Planet").transform.position - transform.position);
-        rb.AddForce(downdirection * 2);
-
-        if (Physics.Raycast(transform.position, downdirection, out RaycastHit hit, planetLayer))
-        {
-            transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-        }
-
-        moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized * speed * Time.deltaTime;
+        Vector3 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized * speed;
         moveDirection = transform.TransformDirection(moveDirection);
 
         rb.MovePosition(rb.position + moveDirection);
