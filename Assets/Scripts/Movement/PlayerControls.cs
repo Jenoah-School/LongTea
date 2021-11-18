@@ -17,9 +17,10 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized * speed;
+        Vector3 moveDirection = new Vector3(Input.GetAxisRaw("HorizontalMove"), 0, Input.GetAxisRaw("VerticalMove")).normalized * speed;
         moveDirection = transform.TransformDirection(moveDirection);
-
         rb.MovePosition(rb.position + moveDirection);
+
+        transform.Rotate(0, Input.GetAxisRaw("HorizontalRotate"), 0);
     }
 }

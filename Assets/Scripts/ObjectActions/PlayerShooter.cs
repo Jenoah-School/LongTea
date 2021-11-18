@@ -19,10 +19,10 @@ public class PlayerShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             GameObject bulletClone = LeanPool.Spawn(bulletPrefab, null, true);
-            bulletClone.transform.position = transform.position + transform.forward * 2;
+            bulletClone.transform.position = transform.position + transform.forward;
             bulletClone.transform.rotation = transform.rotation;
 
             if (shotSound != null)

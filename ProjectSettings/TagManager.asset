@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Planet
-  - Resource
+  - Enemy
   layers:
   - Default
   - TransparentFX
