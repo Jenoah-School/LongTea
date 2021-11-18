@@ -7,7 +7,8 @@ using Lean.Pool;
 public class PlanetGeneration : MonoBehaviour
 {
     [SerializeField] private int resolution = 5;
-    [SerializeField] public float planetSize = 1f;
+    [SerializeField] private float planetSize = 1f;
+    [SerializeField] private bool flatShaded = true;
 
     [Header("Structures")]
     [SerializeField] private List<GameObject> trees = new List<GameObject>();
@@ -30,8 +31,10 @@ public class PlanetGeneration : MonoBehaviour
 		mesh.name = "Planet #" + Random.Range(1000, 9999);
 		CreateVertices();
 		CreateTriangles();
-        ShadeFlat();
+        if(flatShaded) ShadeFlat();
         CreateColliders();
+        PlanetInfo planetInfo = gameObject.AddComponent<PlanetInfo>();
+        planetInfo.SetPlanetSize(planetSize);
 
         Vegetate();
         PlanetManager.instance.SetPlanet(gameObject);

@@ -6,7 +6,7 @@ public class PlanetManager : MonoBehaviour
 {
     public static PlanetManager instance = null;
 
-    private GameObject currentPlanet;
+    private PlanetInfo currentPlanet;
 
     public void Awake()
     {
@@ -14,7 +14,7 @@ public class PlanetManager : MonoBehaviour
         SetPlanet(GameObject.FindGameObjectWithTag("Planet"));
     }
 
-    public void SetPlanet(GameObject planet)
+    public void SetPlanet(PlanetInfo planet)
     {
         if (planet != null)
         {
@@ -22,8 +22,21 @@ public class PlanetManager : MonoBehaviour
         }
     }
 
-    public GameObject GetPlanet()
+    public void SetPlanet(GameObject planet)
+    {
+        if (planet != null)
+        {
+            planet.TryGetComponent(out currentPlanet);
+        }
+    }
+
+    public PlanetInfo GetPlanet()
     {
         return currentPlanet;
+    }
+
+    public float GetRadius()
+    {
+        return 1f;
     }
 }

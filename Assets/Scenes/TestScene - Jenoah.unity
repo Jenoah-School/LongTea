@@ -748,6 +748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolution: 7
   planetSize: 15
+  flatShaded: 1
   trees:
   - {fileID: 8805093607805115309, guid: c10522f259dff8c4cbb1ec06a30e9077, type: 3}
   treeAmount: 20
