@@ -304,9 +304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d557626639aaa8e48832dbdfbba46485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1718646174}
   score: 0
   totalScore: 0
+  scoreText: {fileID: 1718646174}
+  squishTime: 0.4
+  squishAmount: 0.4
 --- !u!1 &706424933
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,13 +767,20 @@ MonoBehaviour:
   resolution: 7
   planetSize: 15
   flatShaded: 1
+  structureIgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  spawnIterations: 4
   trees:
   - {fileID: 8805093607805115309, guid: c10522f259dff8c4cbb1ec06a30e9077, type: 3}
-  treeAmount: 12
+  treeAmount: 30
   treeScaleMargin: 0.2
+  treeRadius: 10
   resources:
   - {fileID: 166964088187044363, guid: e356199faf7418e47b009c715a5c13fa, type: 3}
   resourceAmount: 4
+  resourceRadius: 2
+  planets: []
 --- !u!23 &878080276
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1223,9 +1232,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1871612743, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 176
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871612743, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -240
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079576612109237575, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5079576613397785239, guid: e61999812890cef418375fc0b79e923b, type: 3}
       propertyPath: m_Name
       value: --== UI ==--
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079576613397785239, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5079576613397785240, guid: e61999812890cef418375fc0b79e923b, type: 3}
       propertyPath: OnPause.m_PersistentCalls.m_Calls.Array.data[2].m_Target

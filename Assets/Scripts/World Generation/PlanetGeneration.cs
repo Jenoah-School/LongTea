@@ -11,41 +11,51 @@ public class PlanetGeneration : MonoBehaviour
     [SerializeField] private bool flatShaded = true;
 
     [Header("Structures")]
+    [SerializeField] private LayerMask structureIgnoreLayers;
+    [SerializeField] private int spawnIterations = 4;
+    [Space(20)]
     [SerializeField] private List<GameObject> trees = new List<GameObject>();
     [SerializeField] private float treeAmount = 7;
     [SerializeField] private float treeScaleMargin = 0.2f;
+    [SerializeField] private float treeRadius = 2f;
     [Space(20)]
     [SerializeField] private List<GameObject> resources = new List<GameObject>();
     [SerializeField] private int resourceAmount = 4;
+    [SerializeField] private float resourceRadius = 2f;
+
+    private int spawnedResources = 0;
 
     private Mesh mesh;
     private Vector3[] vertices;
     private Vector3[] normals;
     private Color32[] cubeUV;
 
-    private void Start()
-	{
-		Generate();
-	}
+    [SerializeField] private List<GameObject> planets = new List<GameObject>();
 
-	private void Generate()
-	{
-		GetComponent<MeshFilter>().mesh = mesh = new Mesh();
-		mesh.name = "Planet #" + Random.Range(1000, 9999);
-		CreateVertices();
-		CreateTriangles();
-        if(flatShaded) ShadeFlat();
+    private void Start()
+    {
+        Generate();
+    }
+
+    private void Generate()
+    {
+        GetComponent<MeshFilter>().mesh = mesh = new Mesh();
+        mesh.name = "Planet #" + Random.Range(1000, 9999);
+        CreateVertices();
+        CreateTriangles();
+        if (flatShaded) ShadeFlat();
         CreateColliders();
         PlanetInfo planetInfo = gameObject.AddComponent<PlanetInfo>();
         planetInfo.SetPlanetSize(planetSize);
-        planetInfo.SetResourceAmount(resourceAmount);
 
-        Vegetate();
         SpawnResources();
+        Vegetate();
+
+        planetInfo.SetResourceAmount(resourceAmount);
 
         //TODO: Make this not regenerate on each planet generation
         PlanetManager.instance.SetPlanet(gameObject);
-        ScoreManager.instance.SetTotalScore(resourceAmount);
+        ScoreManager.instance.SetTotalScore(spawnedResources);
 
     }
 
@@ -241,26 +251,47 @@ public class PlanetGeneration : MonoBehaviour
     {
         for (int i = 0; i < treeAmount; i++)
         {
-            GameObject spawnedTree = LeanPool.Spawn(trees[0], transform);
-            spawnedTree.transform.localScale = Vector3.one * Random.Range(1f - treeScaleMargin, 1f + treeScaleMargin);
-            spawnedTree.transform.position = Random.onUnitSphere * (planetSize - 0.2f);
-            spawnedTree.transform.rotation = Quaternion.LookRotation(spawnedTree.transform.position - transform.position, transform.right);
-            spawnedTree.transform.localRotation *= Quaternion.Euler(90, 0, 0);
+            if(!SpawnOnRandomPosition(trees[0], treeRadius))
+            {
+                Debug.Log("Unable to spawn tree");
+            }
         }
+    }
+
+    bool IsOccupied(Vector3 checkPosition, float checkRadius)
+    {
+        return Physics.CheckSphere(checkPosition, checkRadius, ~structureIgnoreLayers);
     }
 
     void SpawnResources()
     {
         for (int i = 0; i < resourceAmount; i++)
         {
-            GameObject resource = LeanPool.Spawn(resources[0], transform);
-            resource.transform.position = Random.onUnitSphere * (planetSize - 0.2f);
-            resource.transform.rotation = Quaternion.LookRotation(resource.transform.position - transform.position, transform.right);
-            resource.transform.localRotation *= Quaternion.Euler(90, 0, 0);
+            if (SpawnOnRandomPosition(resources[0], resourceRadius))
+            {
+                spawnedResources++;
+            }
         }
     }
 
-
+    bool SpawnOnRandomPosition(GameObject objectToSpawn, float checkRadius = 2f)
+    {
+        for (int j = 0; j < spawnIterations; j++)
+        {
+            Vector3 potentialSpawnpoint = Random.onUnitSphere * (planetSize - 0.2f);
+            Debug.Log(potentialSpawnpoint);
+            Debug.DrawLine(potentialSpawnpoint, potentialSpawnpoint + Vector3.up * checkRadius, Color.blue * 5f);
+            if (!IsOccupied(transform.position + potentialSpawnpoint, checkRadius))
+            {
+                GameObject spawnedObject = LeanPool.Spawn(objectToSpawn, transform);
+                spawnedObject.transform.position = Random.onUnitSphere * (planetSize - 0.2f);
+                spawnedObject.transform.rotation = Quaternion.LookRotation(spawnedObject.transform.position - transform.position, transform.right);
+                spawnedObject.transform.localRotation *= Quaternion.Euler(90, 0, 0);
+                return true;
+            }
+        }
+        return false;
+    }
 
     private void CreateColliders()
     {
