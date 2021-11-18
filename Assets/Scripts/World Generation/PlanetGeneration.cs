@@ -279,8 +279,8 @@ public class PlanetGeneration : MonoBehaviour
         for (int j = 0; j < spawnIterations; j++)
         {
             Vector3 potentialSpawnpoint = Random.onUnitSphere * (planetSize - 0.2f);
-            Debug.Log(potentialSpawnpoint);
-            Debug.DrawLine(potentialSpawnpoint, potentialSpawnpoint + Vector3.up * checkRadius, Color.blue * 5f);
+            //Debug.Log(potentialSpawnpoint);
+            //Debug.DrawLine(potentialSpawnpoint, potentialSpawnpoint + Vector3.up * checkRadius, Color.blue * 5f);
             if (!IsOccupied(transform.position + potentialSpawnpoint, checkRadius))
             {
                 GameObject spawnedObject = LeanPool.Spawn(objectToSpawn, transform);

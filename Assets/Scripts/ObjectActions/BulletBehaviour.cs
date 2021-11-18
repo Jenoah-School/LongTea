@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using DG.Tweening;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -33,6 +34,12 @@ public class BulletBehaviour : MonoBehaviour
         if (destroySound != null)
         {
             AudioSource.PlayClipAtPoint(destroySound, transform.position);
+        }
+        Transform collidedTransform = collision.collider.transform;
+        if (collidedTransform.CompareTag("Enemy"))
+        {
+            collidedTransform.DOPunchScale(Vector3.one * 0.5f, 0.2f);
+            Destroy(collidedTransform.gameObject, .2f);
         }
         LeanPool.Despawn(gameObject);
     }
