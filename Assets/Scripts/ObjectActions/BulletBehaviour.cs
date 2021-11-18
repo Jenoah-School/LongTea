@@ -27,7 +27,7 @@ public class BulletBehaviour : MonoBehaviour
         transform.RotateAround(PlanetManager.instance.GetPlanet().transform.position, transform.right, (moveSpeed * Time.deltaTime) / planetSize);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         //other.gameObject.SetActive(false);
         if (destroySound != null)

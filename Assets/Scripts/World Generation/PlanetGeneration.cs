@@ -14,6 +14,9 @@ public class PlanetGeneration : MonoBehaviour
     [SerializeField] private List<GameObject> trees = new List<GameObject>();
     [SerializeField] private float treeAmount = 7;
     [SerializeField] private float treeScaleMargin = 0.2f;
+    [Space(20)]
+    [SerializeField] private List<GameObject> resources = new List<GameObject>();
+    [SerializeField] private int resourceAmount = 4;
 
     private Mesh mesh;
     private Vector3[] vertices;
@@ -35,9 +38,14 @@ public class PlanetGeneration : MonoBehaviour
         CreateColliders();
         PlanetInfo planetInfo = gameObject.AddComponent<PlanetInfo>();
         planetInfo.SetPlanetSize(planetSize);
+        planetInfo.SetResourceAmount(resourceAmount);
 
         Vegetate();
+        SpawnResources();
+
+        //TODO: Make this not regenerate on each planet generation
         PlanetManager.instance.SetPlanet(gameObject);
+        ScoreManager.instance.SetTotalScore(resourceAmount);
 
     }
 
@@ -238,6 +246,17 @@ public class PlanetGeneration : MonoBehaviour
             spawnedTree.transform.position = Random.onUnitSphere * (planetSize - 0.2f);
             spawnedTree.transform.rotation = Quaternion.LookRotation(spawnedTree.transform.position - transform.position, transform.right);
             spawnedTree.transform.localRotation *= Quaternion.Euler(90, 0, 0);
+        }
+    }
+
+    void SpawnResources()
+    {
+        for (int i = 0; i < resourceAmount; i++)
+        {
+            GameObject resource = LeanPool.Spawn(resources[0], transform);
+            resource.transform.position = Random.onUnitSphere * (planetSize - 0.2f);
+            resource.transform.rotation = Quaternion.LookRotation(resource.transform.position - transform.position, transform.right);
+            resource.transform.localRotation *= Quaternion.Euler(90, 0, 0);
         }
     }
 
