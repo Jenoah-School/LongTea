@@ -21,7 +21,8 @@ public class QuickAnimations : MonoBehaviour
     [SerializeField] private float shrinkTarget = 0.5f;
     [SerializeField] private float squishTarget = 0.1f;
     [SerializeField] private float shakeStrength = .5f;
-    [SerializeField] private Color colorTarget = Color.white;
+    [SerializeField] private Vector3 targetOffset = new Vector3(0f, 20f, 0f);
+    [SerializeField, ColorUsage(true, true)] private Color colorTarget = Color.white;
 
     private List<Material> materials = new List<Material>();
     private List<Color> defaultMaterialColor = new List<Color>();
@@ -55,6 +56,11 @@ public class QuickAnimations : MonoBehaviour
         {
             image.DOColor(colorTarget, speed);
         }
+    }
+
+    public void OffsetObject(float speed)
+    {
+        transform.DOMove(transform.position + targetOffset, speed);
     }
     public void SetMaterialColor(float speed)
     {

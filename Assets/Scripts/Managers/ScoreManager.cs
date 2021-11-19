@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private float squishTime = 0.4f;
     [SerializeField] private float squishAmount = 0.1f;
+
+    [Header("Events")]
+    [SerializeField] private UnityEvent OnMaxScore;
+
+    private bool maxScoreReached = false;
 
     private void Awake()
     {
@@ -30,18 +36,21 @@ public class ScoreManager : MonoBehaviour
     {
         score = newScore;
         UpdateScoreLabelAnimated();
+        CheckScore();
     }
 
     public void SetTotalScore(int newTotalScore)
     {
         totalScore = newTotalScore;
         UpdateScoreLabel();
+        CheckScore();
     }
 
     public void IncreaseScore(int incrementAmount)
     {
         score += incrementAmount;
         UpdateScoreLabelAnimated();
+        CheckScore();
     }
 
     public int GetTotalScore()
@@ -63,5 +72,14 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = $"{score}/{totalScore}";
         scoreText.rectTransform.DOPunchScale(Vector3.one * squishAmount, squishTime);
+    }
+
+    public void CheckScore()
+    {
+        if(!maxScoreReached && score >= totalScore)
+        {
+            OnMaxScore.Invoke();
+            maxScoreReached = true;
+        }
     }
 }

@@ -3,25 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class PlanetGeneration : MonoBehaviour
 {
     [SerializeField] private int resolution = 5;
     [SerializeField] private float planetSize = 1f;
     [SerializeField] private bool flatShaded = true;
+    [SerializeField] private string planetLayer = "Planet";
 
     [Header("Structures")]
     [SerializeField] private LayerMask structureIgnoreLayers;
     [SerializeField] private int spawnIterations = 4;
     [Space(20)]
-    [SerializeField] private List<GameObject> trees = new List<GameObject>();
-    [SerializeField] private int treeAmount = 7;
-    [SerializeField] private float treeScaleMargin = 0.2f;
-    [SerializeField] private float treeRadius = 2f;
-    [Space(20)]
-    [SerializeField] private List<GameObject> resources = new List<GameObject>();
-    [SerializeField] private int resourceAmount = 4;
-    [SerializeField] private float resourceRadius = 2f;
+    [SerializeField] private List<PlanetBiome> planetBiomes = new List<PlanetBiome>();
 
     private int spawnedResources = 0;
 
@@ -33,29 +26,41 @@ public class PlanetGeneration : MonoBehaviour
     [SerializeField] private List<PlanetInfo> planets = new List<PlanetInfo>();
     [SerializeField] private List<GameObject> placedResources = new List<GameObject>();
 
+    private GameObject currentPlanet = null;
+    private PlanetBiome currentBiome = null;
+
     private void Start()
     {
+        if (planetBiomes.Count <= 0) return;
+        currentBiome = planetBiomes[Random.Range(0, planetBiomes.Count)];
         Generate();
     }
 
     private void Generate()
     {
-        GetComponent<MeshFilter>().mesh = mesh = new Mesh();
+        currentPlanet = new GameObject("Planet #" + Random.Range(1000, 9999));
+
+        currentPlanet.AddComponent<MeshFilter>().mesh = mesh = new Mesh();
+        MeshRenderer planetMeshRenderer = currentPlanet.AddComponent<MeshRenderer>();
+        planetMeshRenderer.sharedMaterial = currentBiome.planetMaterial;
+        currentPlanet.layer = LayerMask.NameToLayer(planetLayer);
+
         mesh.name = "Planet #" + Random.Range(1000, 9999);
+
         CreateVertices();
         CreateTriangles();
         if (flatShaded) ShadeFlat();
-        gameObject.AddComponent<SphereCollider>();
-        PlanetInfo planetInfo = gameObject.AddComponent<PlanetInfo>();
+
+        PlanetInfo planetInfo = currentPlanet.AddComponent<PlanetInfo>();
+        currentPlanet.AddComponent<SphereCollider>();
         planets.Add(planetInfo);
         planetInfo.SetPlanetSize(planetSize);
 
-        StartCoroutine(SpawnObjects(resourceAmount, resourceRadius, resources, placedResources, UpdateResourceCount));
-        StartCoroutine(SpawnObjects(treeAmount, treeRadius, trees));
+        PlanetObject resourceObject = currentBiome.resources[Random.Range(0, currentBiome.resources.Count)];
+        StartCoroutine(SpawnObjects(resourceObject, currentBiome.resourceAmount, placedResources, UpdateResourceCount));        
 
         //TODO: Make this not regenerate on each planet generation
-        PlanetManager.instance.SetPlanet(gameObject);
-        
+        PlanetManager.instance.SetPlanet(currentPlanet);
     }
 
     private void CreateVertices()
@@ -250,13 +255,38 @@ public class PlanetGeneration : MonoBehaviour
     {
         planets[0].SetResourceAmount(placedResources.Count);
         ScoreManager.instance.SetTotalScore(placedResources.Count);
+        StartCoroutine(SpawnObjects(currentBiome.vegetation, currentBiome.vegetationAmount, null, null));
     }
 
-    IEnumerator SpawnObjects(int amount, float spawnRadius, GameObject objectToSpawn, List<GameObject> outputList = null, System.Action finishedAction = null)
+    bool IsOccupied(Vector3 checkPosition, float checkRadius)
     {
-        for (int i = 0; i < amount; i++)
+        return Physics.CheckSphere(checkPosition, checkRadius, ~structureIgnoreLayers);
+    }
+
+    bool SpawnOnRandomPosition(GameObject objectToSpawn, float checkRadius = 2f, List<GameObject> outputList = null, float sizeDifference = 0)
+    {
+        for (int j = 0; j < spawnIterations; j++)
         {
-            if (!SpawnOnRandomPosition(objectToSpawn, spawnRadius, outputList))
+            Vector3 potentialSpawnpoint = currentPlanet.transform.TransformPoint(Random.onUnitSphere * (planetSize - 0.2f));
+            if (!IsOccupied(potentialSpawnpoint, checkRadius))
+            {
+                GameObject spawnedObject = LeanPool.Spawn(objectToSpawn, currentPlanet.transform);
+                spawnedObject.transform.position = potentialSpawnpoint;
+                spawnedObject.transform.rotation = Quaternion.LookRotation(potentialSpawnpoint - currentPlanet.transform.position, currentPlanet.transform.right);
+                spawnedObject.transform.localScale = Vector3.one * (1f + Random.Range(-sizeDifference, sizeDifference));
+                spawnedObject.transform.localRotation *= Quaternion.Euler(90, 0, 0);
+                if (outputList != null) outputList.Add(spawnedObject);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    IEnumerator SpawnObjects(PlanetObject planetObject, int spawnAmount = 5, List<GameObject> outputList = null, System.Action finishedAction = null)
+    {
+        for (int i = 0; i < spawnAmount; i++)
+        {
+            if (!SpawnOnRandomPosition(planetObject.objectPrefab, planetObject.objectRadius, outputList, planetObject.objectScaleMargin))
             {
                 Debug.Log("Unable to spawn object");
             }
@@ -266,42 +296,19 @@ public class PlanetGeneration : MonoBehaviour
         if (finishedAction != null) finishedAction();
     }
 
-    IEnumerator SpawnObjects(int amount, float spawnRadius, List<GameObject> objectsToSpawns, List<GameObject> outputList = null, System.Action finishedAction = null)
+    IEnumerator SpawnObjects(List<PlanetObject> planetObject, int spawnAmount = 5, List<GameObject> outputList = null, System.Action finishedAction = null)
     {
-        int objectAmount = objectsToSpawns.Count;
-        for (int i = 0; i < amount; i++)
+        
+        for (int i = 0; i < spawnAmount; i++)
         {
-            GameObject objectToSpawn = objectsToSpawns[Random.Range(0, objectAmount)];
-            if (!SpawnOnRandomPosition(objectToSpawn, spawnRadius, outputList))
+            PlanetObject objectToSpawn = planetObject[Random.Range(0, planetObject.Count)];
+            if (!SpawnOnRandomPosition(objectToSpawn.objectPrefab, objectToSpawn.objectRadius, outputList, objectToSpawn.objectScaleMargin))
             {
-                Debug.Log("Unable to spawn object");
+                Debug.Log($"Unable to spawn object '{objectToSpawn.objectPrefab.name}'");
             }
             yield return new WaitForEndOfFrame();
         }
 
-        if(finishedAction != null) finishedAction();
-    }
-
-    bool IsOccupied(Vector3 checkPosition, float checkRadius)
-    {
-        return Physics.CheckSphere(checkPosition, checkRadius, ~structureIgnoreLayers);
-    }
-
-    bool SpawnOnRandomPosition(GameObject objectToSpawn, float checkRadius = 2f, List<GameObject> outputList = null)
-    {
-        for (int j = 0; j < spawnIterations; j++)
-        {
-            Vector3 potentialSpawnpoint = transform.TransformPoint(Random.onUnitSphere * (planetSize - 0.2f));
-            if (!IsOccupied(potentialSpawnpoint, checkRadius))
-            {
-                GameObject spawnedObject = LeanPool.Spawn(objectToSpawn, transform);
-                spawnedObject.transform.position = potentialSpawnpoint;
-                spawnedObject.transform.rotation = Quaternion.LookRotation(potentialSpawnpoint - transform.position, transform.right);
-                spawnedObject.transform.localRotation *= Quaternion.Euler(90, 0, 0);
-                if (outputList != null) outputList.Add(spawnedObject);
-                return true;
-            }
-        }
-        return false;
+        if (finishedAction != null) finishedAction();
     }
 }

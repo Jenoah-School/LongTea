@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca2a0ed5549d8c4d82db3fd8262592a, type: 3}
+  m_Name: Placeholder - Green
+  m_EditorClassIdentifier: 
+  planetMaterial: {fileID: 2100000, guid: 3b9f4a5da4f823341b2278d17293d3f7, type: 2}
+  vegetationAmount: 40
+  vegetation:
+  - {fileID: 11400000, guid: 57151642a6f2e8648af32aaf2979694b, type: 2}
+  - {fileID: 11400000, guid: 0aede59f8dab02a4cb9d0f2e841f57a8, type: 2}
+  resourceAmount: 4
+  resources:
+  - {fileID: 11400000, guid: 3be07c4ca4026bd4a929ad3eca3c4ce9, type: 2}
