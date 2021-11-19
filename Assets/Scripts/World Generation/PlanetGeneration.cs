@@ -15,7 +15,7 @@ public class PlanetGeneration : MonoBehaviour
     [SerializeField] private int spawnIterations = 4;
     [Space(20)]
     [SerializeField] private List<GameObject> trees = new List<GameObject>();
-    [SerializeField] private float treeAmount = 7;
+    [SerializeField] private int treeAmount = 7;
     [SerializeField] private float treeScaleMargin = 0.2f;
     [SerializeField] private float treeRadius = 2f;
     [Space(20)]
@@ -30,7 +30,8 @@ public class PlanetGeneration : MonoBehaviour
     private Vector3[] normals;
     private Color32[] cubeUV;
 
-    [SerializeField] private List<GameObject> planets = new List<GameObject>();
+    [SerializeField] private List<PlanetInfo> planets = new List<PlanetInfo>();
+    [SerializeField] private List<GameObject> placedResources = new List<GameObject>();
 
     private void Start()
     {
@@ -44,19 +45,17 @@ public class PlanetGeneration : MonoBehaviour
         CreateVertices();
         CreateTriangles();
         if (flatShaded) ShadeFlat();
-        CreateColliders();
+        gameObject.AddComponent<SphereCollider>();
         PlanetInfo planetInfo = gameObject.AddComponent<PlanetInfo>();
+        planets.Add(planetInfo);
         planetInfo.SetPlanetSize(planetSize);
 
-        SpawnResources();
-        Vegetate();
-
-        planetInfo.SetResourceAmount(resourceAmount);
+        StartCoroutine(SpawnObjects(resourceAmount, resourceRadius, resources, placedResources, UpdateResourceCount));
+        StartCoroutine(SpawnObjects(treeAmount, treeRadius, trees));
 
         //TODO: Make this not regenerate on each planet generation
         PlanetManager.instance.SetPlanet(gameObject);
-        ScoreManager.instance.SetTotalScore(spawnedResources);
-
+        
     }
 
     private void CreateVertices()
@@ -230,7 +229,7 @@ public class PlanetGeneration : MonoBehaviour
         return i + 6;
     }
 
-    void ShadeFlat()
+    private void ShadeFlat()
     {
         Vector3[] oldVerts = mesh.vertices;
         int[] triangles = mesh.triangles;
@@ -247,15 +246,40 @@ public class PlanetGeneration : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
-    void Vegetate()
+    private void UpdateResourceCount()
     {
-        for (int i = 0; i < treeAmount; i++)
+        planets[0].SetResourceAmount(placedResources.Count);
+        ScoreManager.instance.SetTotalScore(placedResources.Count);
+    }
+
+    IEnumerator SpawnObjects(int amount, float spawnRadius, GameObject objectToSpawn, List<GameObject> outputList = null, System.Action finishedAction = null)
+    {
+        for (int i = 0; i < amount; i++)
         {
-            if(!SpawnOnRandomPosition(trees[0], treeRadius))
+            if (!SpawnOnRandomPosition(objectToSpawn, spawnRadius, outputList))
             {
-                Debug.Log("Unable to spawn tree");
+                Debug.Log("Unable to spawn object");
             }
+            yield return new WaitForEndOfFrame();
         }
+
+        if (finishedAction != null) finishedAction();
+    }
+
+    IEnumerator SpawnObjects(int amount, float spawnRadius, List<GameObject> objectsToSpawns, List<GameObject> outputList = null, System.Action finishedAction = null)
+    {
+        int objectAmount = objectsToSpawns.Count;
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject objectToSpawn = objectsToSpawns[Random.Range(0, objectAmount)];
+            if (!SpawnOnRandomPosition(objectToSpawn, spawnRadius, outputList))
+            {
+                Debug.Log("Unable to spawn object");
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        if(finishedAction != null) finishedAction();
     }
 
     bool IsOccupied(Vector3 checkPosition, float checkRadius)
@@ -263,38 +287,21 @@ public class PlanetGeneration : MonoBehaviour
         return Physics.CheckSphere(checkPosition, checkRadius, ~structureIgnoreLayers);
     }
 
-    void SpawnResources()
-    {
-        for (int i = 0; i < resourceAmount; i++)
-        {
-            if (SpawnOnRandomPosition(resources[0], resourceRadius))
-            {
-                spawnedResources++;
-            }
-        }
-    }
-
-    bool SpawnOnRandomPosition(GameObject objectToSpawn, float checkRadius = 2f)
+    bool SpawnOnRandomPosition(GameObject objectToSpawn, float checkRadius = 2f, List<GameObject> outputList = null)
     {
         for (int j = 0; j < spawnIterations; j++)
         {
-            Vector3 potentialSpawnpoint = Random.onUnitSphere * (planetSize - 0.2f);
-            //Debug.Log(potentialSpawnpoint);
-            //Debug.DrawLine(potentialSpawnpoint, potentialSpawnpoint + Vector3.up * checkRadius, Color.blue * 5f);
-            if (!IsOccupied(transform.position + potentialSpawnpoint, checkRadius))
+            Vector3 potentialSpawnpoint = transform.TransformPoint(Random.onUnitSphere * (planetSize - 0.2f));
+            if (!IsOccupied(potentialSpawnpoint, checkRadius))
             {
                 GameObject spawnedObject = LeanPool.Spawn(objectToSpawn, transform);
-                spawnedObject.transform.position = Random.onUnitSphere * (planetSize - 0.2f);
-                spawnedObject.transform.rotation = Quaternion.LookRotation(spawnedObject.transform.position - transform.position, transform.right);
+                spawnedObject.transform.position = potentialSpawnpoint;
+                spawnedObject.transform.rotation = Quaternion.LookRotation(potentialSpawnpoint - transform.position, transform.right);
                 spawnedObject.transform.localRotation *= Quaternion.Euler(90, 0, 0);
+                if (outputList != null) outputList.Add(spawnedObject);
                 return true;
             }
         }
         return false;
-    }
-
-    private void CreateColliders()
-    {
-        gameObject.AddComponent<SphereCollider>();
     }
 }
