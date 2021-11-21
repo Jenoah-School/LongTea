@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 0d663f5160a964844b4dec1e02f137ac, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9b998884ce9200046bcc171b4bdc44d6, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -467,7 +467,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397466450}
-  m_LocalRotation: {x: 0.5570927, y: 0.0000000111139125, z: -0.000000007455573, w: 0.8304503}
+  m_LocalRotation: {x: 0.5570928, y: -0.00000005644616, z: 0.000000037865902, w: 0.8304503}
   m_LocalPosition: {x: 35.98202, y: 56.321716, z: 30.50351}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -941,8 +941,7 @@ MonoBehaviour:
     m_Bits: 64
   spawnIterations: 4
   planetBiomes:
-  - {fileID: 11400000, guid: a417e397bbd48b8419c55c8f119d13f9, type: 2}
-  - {fileID: 11400000, guid: 402c94a0aac0d0942b076a8c75bfdc7b, type: 2}
+  - {fileID: 11400000, guid: cf08d14c4bee23a478831f69b2c82950, type: 2}
   planets: []
   placedResources: []
 --- !u!1 &810263026
@@ -1030,7 +1029,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310708197}
-  m_LocalRotation: {x: 0.5570927, y: 0.0000000111139125, z: -0.000000007455573, w: 0.8304503}
+  m_LocalRotation: {x: 0.5570928, y: -0.00000005644616, z: 0.000000037865902, w: 0.8304503}
   m_LocalPosition: {x: 35.98202, y: 56.321716, z: 30.50351}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
