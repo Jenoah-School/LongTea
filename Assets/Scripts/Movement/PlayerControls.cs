@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    [SerializeField] private LayerMask planetLayer;
     [SerializeField] float speed = 10f;
 
     private Rigidbody rb;

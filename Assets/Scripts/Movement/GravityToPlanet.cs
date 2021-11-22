@@ -11,21 +11,19 @@ public class GravityToPlanet : MonoBehaviour
 
     private Rigidbody rb = null;
 
-    // Start is called before the first frame update
     void Start()
     {
         planet ??= PlanetManager.instance.GetPlanet().transform;
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (planet == null) return;
 
         Vector3 gravityDirection = (planet.position - transform.position).normalized;
 
-        rb.AddForce(gravityDirection * gravity);
+        rb.AddForce(gravityDirection * gravity, ForceMode.Acceleration);
 
         if (rotateToPlanet)
         {
