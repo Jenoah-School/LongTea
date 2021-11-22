@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Placeholder - Green
   m_EditorClassIdentifier: 
   planetMaterial: {fileID: 2100000, guid: 3b9f4a5da4f823341b2278d17293d3f7, type: 2}
+  noiseScale: 0.4
   vegetationAmount: 40
   vegetation:
   - {fileID: 11400000, guid: 57151642a6f2e8648af32aaf2979694b, type: 2}
   - {fileID: 11400000, guid: 0aede59f8dab02a4cb9d0f2e841f57a8, type: 2}
+  noColliderAmount: 60
+  noColliderObjects:
+  - {fileID: 11400000, guid: 44cbd6ead8c0e1d48aaac59ec76e6cd5, type: 2}
   resourceAmount: 4
   resources:
   - {fileID: 11400000, guid: 3be07c4ca4026bd4a929ad3eca3c4ce9, type: 2}

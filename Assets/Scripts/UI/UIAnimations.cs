@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using DG.Tweening;
 
 [RequireComponent(typeof(AudioSource))]
 public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, ISelectHandler, IDeselectHandler, ISubmitHandler
@@ -13,6 +14,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     [SerializeField, Range(0f, 4f)] private float widthMultiplier = 1.5f;
     [SerializeField, Range(0f, 4f)] private float heightMultiplier = 1f;
     [SerializeField] private bool moveFromCenter = true;
+    private CanvasGroup canvasGroup;
 
     [Header("Movement")]
     [SerializeField] private Vector2 targetPosition = Vector2.zero;
@@ -41,6 +43,10 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
         startSize = rectTransform.sizeDelta;
         startPosition = rectTransform.anchoredPosition;
         audioSource = GetComponent<AudioSource>();
+        if(!TryGetComponent(out canvasGroup))
+        {
+            canvasGroup = transform.GetComponentInParent<CanvasGroup>();
+        }
     }
 
     #region Sizing
@@ -92,6 +98,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (canvasGroup != null && !canvasGroup.interactable) return;
         GrowToSize();
         PlayClickHoverSound();
         OnHoverEnter.Invoke();
@@ -99,6 +106,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     }
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (canvasGroup != null && !canvasGroup.interactable) return;
         ReturnToStartSize();
         OnHoverExit.Invoke();
         isSelected = false;
@@ -107,6 +115,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     //Do the same as PointerEnter, but when using arrows/controller instead of mouse
     public void OnSelect(BaseEventData eventData)
     {
+        if (canvasGroup != null && !canvasGroup.interactable) return;
         GrowToSize();
         PlayClickHoverSound();
         OnHoverEnter.Invoke();
@@ -116,6 +125,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     //Do the same as PointerExit, but when using arrows/controller instead of mouse
     public void OnDeselect(BaseEventData eventData)
     {
+        if (canvasGroup != null && !canvasGroup.interactable) return;
         ReturnToStartSize();
         OnHoverExit.Invoke();
         isSelected = false;
@@ -123,17 +133,20 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (canvasGroup != null && !canvasGroup.interactable) return;
         PlayClickUpSound();
         if (isSelected) OnSuccesfulClick.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (canvasGroup != null && !canvasGroup.interactable) return;
         PlayClickDownSound();
     }
 
     public void OnSubmit(BaseEventData eventData)
     {
+        if (canvasGroup != null && !canvasGroup.interactable) return;
         OnSuccesfulClick.Invoke();
     }
 
@@ -179,14 +192,12 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
 
     public void MoveToPosition()
     {
-        StopAllCoroutines();
-        StartCoroutine(MoveToPosition_IEnum(targetPosition));
+        rectTransform.DOAnchorPos(targetPosition, animationTime);
     }
 
     public void MoveToStartPosition()
     {
-        StopAllCoroutines();
-        StartCoroutine(MoveToPosition_IEnum(startPosition));
+        rectTransform.DOAnchorPos(startPosition, animationTime);
     }
 
     public void MoveToStartPositionImmediately()

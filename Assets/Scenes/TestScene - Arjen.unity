@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1329908133}
-  m_IndirectSpecularColor: {r: 0.0009020307, g: 0.00091543404, b: 0.0009020307, a: 1}
+  m_IndirectSpecularColor: {r: 0.00092967873, g: 0.00092967873, b: 0.00092398736, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -272,6 +272,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6094281710851029935, guid: e6b053696cc4d094e8aa27ec27fd81c5, type: 3}
   shotSound: {fileID: 8300000, guid: 74835cdcb22f2534e977b07640ebcfca, type: 3}
+  forwardForward: {fileID: 0}
+  shootingJoystick: {fileID: 0}
+  cooldown: 0.5
 --- !u!114 &56126853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +291,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   speed: 0.1
+  movementJoystick: {fileID: 0}
+  rotationJoystick: {fileID: 0}
+  model: {fileID: 0}
 --- !u!54 &56126854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -657,6 +663,7 @@ GameObject:
   - component: {fileID: 734176026}
   - component: {fileID: 734176025}
   - component: {fileID: 734176024}
+  - component: {fileID: 734176028}
   m_Layer: 6
   m_Name: Planet
   m_TagString: Planet
@@ -740,6 +747,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734176028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734176023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46774b6e6601eb24d937abdcd6e5f036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetSize: 50
+  resourceAmount: 0
 --- !u!1 &850092688
 GameObject:
   m_ObjectHideFlags: 0

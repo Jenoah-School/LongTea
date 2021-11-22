@@ -25,7 +25,7 @@ public class GravityToPlanet : MonoBehaviour
 
         Vector3 gravityDirection = (planet.position - transform.position).normalized;
 
-        rb.AddForce(gravityDirection * gravity);
+        rb.AddForce(gravityDirection * gravity, ForceMode.Acceleration);
 
         if (rotateToPlanet)
         {

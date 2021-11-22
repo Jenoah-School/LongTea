@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using UnityEngine.Events;
 
 public class PlanetGeneration : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class PlanetGeneration : MonoBehaviour
     [SerializeField] private bool flatShaded = true;
     [SerializeField] private string planetLayer = "Planet";
 
+    [Header("Finish")]
+    [SerializeField] private UnityEvent onPlanetFinishedGeneration;
+    [SerializeField] private bool bringBackPlayer = false;
+
     [Header("Structures")]
     [SerializeField] private LayerMask structureIgnoreLayers;
     [SerializeField] private int spawnIterations = 4;
@@ -17,26 +22,41 @@ public class PlanetGeneration : MonoBehaviour
     [SerializeField] private List<PlanetBiome> planetBiomes = new List<PlanetBiome>();
 
     private int spawnedResources = 0;
-
+    
     private Mesh mesh;
     private Vector3[] vertices;
     private Vector3[] normals;
     private Color32[] cubeUV;
 
+    [Header("Debug")]
     [SerializeField] private List<PlanetInfo> planets = new List<PlanetInfo>();
     [SerializeField] private List<GameObject> placedResources = new List<GameObject>();
 
     private GameObject currentPlanet = null;
     private PlanetBiome currentBiome = null;
+    private Noise noise;
 
     private void Start()
     {
+        noise = new Noise();
         if (planetBiomes.Count <= 0) return;
         currentBiome = planetBiomes[Random.Range(0, planetBiomes.Count)];
         Generate();
     }
 
-    private void Generate()
+    public void DisableCurrentPlanet()
+    {
+        currentPlanet.SetActive(false);
+        // REMOVE THE BIOME DIFFERENCE THING
+
+        if (planetBiomes.Count <= 0) return;
+        currentBiome = planetBiomes[Random.Range(0, planetBiomes.Count)];
+        ScoreManager.instance.SetScore(0);
+
+        placedResources.Clear();
+    }
+
+    public void Generate()
     {
         currentPlanet = new GameObject("Planet #" + Random.Range(1000, 9999));
 
@@ -49,6 +69,7 @@ public class PlanetGeneration : MonoBehaviour
 
         CreateVertices();
         CreateTriangles();
+        AddNoise();
         if (flatShaded) ShadeFlat();
 
         PlanetInfo planetInfo = currentPlanet.AddComponent<PlanetInfo>();
@@ -57,7 +78,9 @@ public class PlanetGeneration : MonoBehaviour
         planetInfo.SetPlanetSize(planetSize);
 
         PlanetObject resourceObject = currentBiome.resources[Random.Range(0, currentBiome.resources.Count)];
-        StartCoroutine(SpawnObjects(resourceObject, currentBiome.resourceAmount, placedResources, UpdateResourceCount));        
+        StartCoroutine(SpawnObjects(resourceObject, currentBiome.resourceAmount, placedResources, UpdateResourceCount));
+
+        PlaceColliderlessObjects();
 
         //TODO: Make this not regenerate on each planet generation
         PlanetManager.instance.SetPlanet(currentPlanet);
@@ -251,11 +274,40 @@ public class PlanetGeneration : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
+    private void AddNoise()
+    {
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            vertices[i] += normals[i] * noise.Evaluate(vertices[i]) * currentBiome.noiseScale;
+        }
+
+        mesh.vertices = vertices;
+    }
+
     private void UpdateResourceCount()
     {
         planets[0].SetResourceAmount(placedResources.Count);
         ScoreManager.instance.SetTotalScore(placedResources.Count);
-        StartCoroutine(SpawnObjects(currentBiome.vegetation, currentBiome.vegetationAmount, null, null));
+        StartCoroutine(SpawnObjects(currentBiome.vegetation, currentBiome.vegetationAmount, null, EndGeneration, .5f));
+    }
+
+    private void EndGeneration()
+    {
+        onPlanetFinishedGeneration.Invoke();
+    }
+    private void PlaceColliderlessObjects()
+    {
+        if (currentBiome.noColliderAmount <= 0 || currentBiome.noColliderObjects.Count <= 0) return;
+        for (int i = 0; i < currentBiome.noColliderAmount; i++)
+        {
+            PlanetObject noColliderObject = currentBiome.noColliderObjects[Random.Range(0, currentBiome.noColliderObjects.Count)];
+            Vector3 spawnPoint = currentPlanet.transform.TransformPoint(Random.onUnitSphere * (planetSize - 0.2f));
+            GameObject spawnedObject = LeanPool.Spawn(noColliderObject.objectPrefab, currentPlanet.transform);
+            spawnedObject.transform.position = spawnPoint;
+            spawnedObject.transform.rotation = Quaternion.LookRotation(spawnPoint - currentPlanet.transform.position, currentPlanet.transform.right);
+            spawnedObject.transform.localScale = Vector3.one * (1f + Random.Range(-noColliderObject.objectScaleMargin, noColliderObject.objectScaleMargin));
+            spawnedObject.transform.localRotation *= Quaternion.Euler(90, 0, 0);
+        }
     }
 
     bool IsOccupied(Vector3 checkPosition, float checkRadius)
@@ -282,7 +334,7 @@ public class PlanetGeneration : MonoBehaviour
         return false;
     }
 
-    IEnumerator SpawnObjects(PlanetObject planetObject, int spawnAmount = 5, List<GameObject> outputList = null, System.Action finishedAction = null)
+    IEnumerator SpawnObjects(PlanetObject planetObject, int spawnAmount = 5, List<GameObject> outputList = null, System.Action finishedAction = null, float finsishedActionDelay = 0f)
     {
         for (int i = 0; i < spawnAmount; i++)
         {
@@ -293,10 +345,14 @@ public class PlanetGeneration : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        if (finishedAction != null) finishedAction();
+        if (finishedAction != null)
+        {
+            yield return new WaitForSeconds(finsishedActionDelay);
+            finishedAction();
+        }
     }
 
-    IEnumerator SpawnObjects(List<PlanetObject> planetObject, int spawnAmount = 5, List<GameObject> outputList = null, System.Action finishedAction = null)
+    IEnumerator SpawnObjects(List<PlanetObject> planetObject, int spawnAmount = 5, List<GameObject> outputList = null, System.Action finishedAction = null, float finsishedActionDelay = 0f)
     {
         
         for (int i = 0; i < spawnAmount; i++)
@@ -309,6 +365,10 @@ public class PlanetGeneration : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        if (finishedAction != null) finishedAction();
+        if (finishedAction != null)
+        {
+            yield return new WaitForSeconds(finsishedActionDelay);
+            finishedAction();
+        }
     }
 }
