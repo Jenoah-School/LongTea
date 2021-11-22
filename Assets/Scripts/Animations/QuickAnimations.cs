@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Lean.Pool;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class QuickAnimations : MonoBehaviour
 {
@@ -23,6 +24,12 @@ public class QuickAnimations : MonoBehaviour
     [SerializeField] private float shakeStrength = .5f;
     [SerializeField] private Vector3 targetOffset = new Vector3(0f, 20f, 0f);
     [SerializeField, ColorUsage(true, true)] private Color colorTarget = Color.white;
+
+    [Header("Ground settings")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float maxGroundDistance = 100f;
+    [SerializeField] private Vector3 groundOffset = Vector3.up;
+    [SerializeField] private UnityEvent onHitGround;
 
     private List<Material> materials = new List<Material>();
     private List<Color> defaultMaterialColor = new List<Color>();
@@ -60,8 +67,24 @@ public class QuickAnimations : MonoBehaviour
 
     public void OffsetObject(float speed)
     {
-        transform.DOMove(transform.position + targetOffset, speed);
+        transform.DOMove(transform.position + transform.TransformPoint(targetOffset), speed, false);
     }
+
+    public void MoveToGround(float speed)
+    {
+        StartCoroutine(MoveToGroundWithEvent(speed));
+    }
+
+    IEnumerator MoveToGroundWithEvent(float speed)
+    {
+        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, maxGroundDistance, groundLayer))
+        {
+            transform.DOMove(hit.point + transform.TransformDirection(groundOffset), speed, false);
+            yield return new WaitForSeconds(speed);
+            onHitGround.Invoke();
+        }
+    }
+
     public void SetMaterialColor(float speed)
     {
         foreach (Material material in materials)
