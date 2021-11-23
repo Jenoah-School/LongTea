@@ -41,6 +41,11 @@ public class BulletBehaviour : MonoBehaviour
             collidedTransform.DOPunchScale(Vector3.one * 0.5f, 0.2f);
             Destroy(collidedTransform.gameObject, .2f);
         }
+
+        if(collidedTransform.TryGetComponent(out EntityHealth entityHealth))
+        {
+            entityHealth.DealDamage(1);
+        }
         LeanPool.Despawn(gameObject);
     }
 }

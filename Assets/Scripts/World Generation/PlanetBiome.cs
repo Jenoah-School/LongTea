@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Planet Biome", menuName = "Planet Generation/Planet Biome", order = 100)]
 public class PlanetBiome : ScriptableObject
 {
-    public Material planetMaterial;
+    public Gradient heightGradient = new Gradient();
     [Range(0f, 2f)] public float noiseScale = 0.4f;
     [Space(20)]
     public int vegetationAmount = 20;
