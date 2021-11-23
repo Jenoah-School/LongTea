@@ -13,7 +13,7 @@ public class EnemyControls : MonoBehaviour
 
     float fieldOfView = 90;
 
-    float detectionDistance = 10;
+    float detectionDistance = 15;
 
     bool canStartRoaming;
 
@@ -26,6 +26,8 @@ public class EnemyControls : MonoBehaviour
 
     bool hasDetectedPlayer;
 
+    float rotationAngle;
+
     public LayerMask detectionIgnoreLayers;
 
     GameObject player;
@@ -35,6 +37,8 @@ public class EnemyControls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
         StartCoroutine(RoamingMode());
+
+        rotationAngle = Random.Range(0, 360);
     }
 
     void FixedUpdate()
@@ -71,11 +75,7 @@ public class EnemyControls : MonoBehaviour
 
         yield return new WaitForSeconds(roamingDelay);
 
-        roamingDelay = Random.Range(1f, 3f);
-
-        float rotationAngle = Random.Range(0, 360);
-
-        Debug.Log(rotationAngle);
+        roamingDelay = Random.Range(1f, 3f);     
 
         lookDirection = Quaternion.AngleAxis(rotationAngle, transform.up) * transform.forward;
         currentDirection = Vector3.zero;
@@ -86,17 +86,18 @@ public class EnemyControls : MonoBehaviour
             {
                 if (rotationAngle > 180)
                 {
-                    lookDirection = Quaternion.AngleAxis((-rotateSpeed / 10), transform.up) * lookDirection;
+                    lookDirection = Quaternion.AngleAxis((-1), transform.up) * lookDirection;
                 }
                 else
                 {
-                    lookDirection = Quaternion.AngleAxis((rotateSpeed / 10), transform.up) * lookDirection;
+                    lookDirection = Quaternion.AngleAxis((1), transform.up) * lookDirection;
                 }
                 yield return new WaitForEndOfFrame();
             }
             lookDirection = rotationAngle > 180 ? Quaternion.AngleAxis(-15, transform.up) * lookDirection : Quaternion.AngleAxis(15, transform.up) * lookDirection;
         }
 
+        rotationAngle = Random.Range(0, 360);
         StartCoroutine(RotateToTargetVector());
     }
 
@@ -106,13 +107,12 @@ public class EnemyControls : MonoBehaviour
         if(Vector3.Distance(player.transform.position, transform.position) < detectionDistance)
         {
             //Check if player is in field of view
-            if(Vector3.Dot(player.transform.position - transform.position, transform.forward) / Vector3.Magnitude(player.transform.position - transform.position) > Mathf.Cos(fieldOfView / 2))
+            if(Vector3.Dot(player.transform.position - transform.position, transform.forward) / Vector3.Magnitude(player.transform.position - transform.position) > Mathf.Cos(fieldOfView / 2) || Vector3.Distance(player.transform.position, transform.position) < (detectionDistance / 2))
             {
                 if (!Physics.Raycast(transform.position, player.transform.position - transform.position, detectionDistance, ~detectionIgnoreLayers))
                 {
                     if (!hasDetectedPlayer)
                     {
-                        Debug.Log("hoi");
                         StopCoroutine(RoamingMode());
                         StopCoroutine(RotateToTargetVector());
                         hasDetectedPlayer = true;
@@ -124,9 +124,28 @@ public class EnemyControls : MonoBehaviour
             if (hasDetectedPlayer)
             {
                 //Set the look direction of the enemy pointing to the player, on the plane of the forward vector
-                Vector3 differenceVector = player.transform.position - transform.position;
-                lookDirection = Vector3.ProjectOnPlane(differenceVector.normalized, transform.up);
-                currentDirection = new Vector3(0, 0, 1);
+
+                if (!Physics.Raycast(transform.position, player.transform.position - transform.position, detectionDistance, ~detectionIgnoreLayers))
+                {
+                    Vector3 differenceVector = player.transform.position - transform.position;
+                    lookDirection = Vector3.ProjectOnPlane(differenceVector.normalized, transform.up);
+                    currentDirection = new Vector3(0, 0, 1);
+                }
+                else
+                {
+                    if(Vector3.Dot(transform.right, player.transform.position - transform.position) > 0)
+                    {
+                        rotationAngle = 350;
+                    }
+                    else
+                    {
+                        rotationAngle = 10;
+                    }
+                    hasDetectedPlayer = false;
+                    roamingDelay = 0;
+                    StopAllCoroutines();
+                    StartCoroutine(RoamingMode());
+                }              
             }
         }
         else
