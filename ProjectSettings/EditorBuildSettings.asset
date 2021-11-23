@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay.unity
     guid: 573612d56bcc090479280c736f2af440
   - enabled: 1
+    path: Assets/Scenes/TestScene - Liam.unity
+    guid: 6407c29e709985c48bedfa2dc0f9a85f
+  - enabled: 1
     path: Assets/Scenes/TestScene - Jenoah.unity
     guid: 8676fe3c9abb5fb4aace6d522c298ff0
   m_configObjects: {}
