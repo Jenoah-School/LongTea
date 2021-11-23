@@ -10,6 +10,7 @@ public class PlanetGeneration : MonoBehaviour
     [SerializeField] private float planetSize = 1f;
     [SerializeField] private bool flatShaded = true;
     [SerializeField] private string planetLayer = "Planet";
+    [SerializeField] private Material vertexColorMaterial;
 
     [Header("Finish")]
     [SerializeField] private UnityEvent onPlanetFinishedGeneration;
@@ -27,6 +28,7 @@ public class PlanetGeneration : MonoBehaviour
     private Vector3[] vertices;
     private Vector3[] normals;
     private Color32[] cubeUV;
+    private Color32[] colors;
 
     [Header("Debug")]
     [SerializeField] private List<PlanetInfo> planets = new List<PlanetInfo>();
@@ -62,7 +64,7 @@ public class PlanetGeneration : MonoBehaviour
 
         currentPlanet.AddComponent<MeshFilter>().mesh = mesh = new Mesh();
         MeshRenderer planetMeshRenderer = currentPlanet.AddComponent<MeshRenderer>();
-        planetMeshRenderer.sharedMaterial = currentBiome.planetMaterial;
+        planetMeshRenderer.sharedMaterial = vertexColorMaterial;
         currentPlanet.layer = LayerMask.NameToLayer(planetLayer);
 
         mesh.name = "Planet #" + Random.Range(1000, 9999);
@@ -71,6 +73,8 @@ public class PlanetGeneration : MonoBehaviour
         CreateTriangles();
         AddNoise();
         if (flatShaded) ShadeFlat();
+        ApplyColor();
+
 
         PlanetInfo planetInfo = currentPlanet.AddComponent<PlanetInfo>();
         currentPlanet.AddComponent<SphereCollider>();
@@ -134,6 +138,22 @@ public class PlanetGeneration : MonoBehaviour
         mesh.vertices = vertices;
         mesh.normals = normals;
         mesh.colors32 = cubeUV;
+    }
+
+    private void ApplyColor()
+    {
+        Vector3 planetDirection = currentPlanet.transform.position;
+        colors = new Color32[mesh.vertices.Length];
+
+        for (int i = 0; i < mesh.vertices.Length; i++)
+        {
+            float distance = Vector3.Distance(planetDirection, mesh.vertices[i]);
+            float normalizedDistance = Mathf.InverseLerp(-currentBiome.noiseScale, currentBiome.noiseScale, planetSize - distance);
+
+            colors[i] = currentBiome.heightGradient.Evaluate(normalizedDistance);
+        }
+
+        mesh.colors32 = colors;
     }
 
     private void SetVertex(int i, int x, int y, int z)

@@ -33,7 +33,7 @@ public class EnemyControls : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(RoamingMode());
     }
 
@@ -60,7 +60,6 @@ public class EnemyControls : MonoBehaviour
 
         Debug.DrawLine(transform.position, transform.position + lookDirection, Color.yellow);
         Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red);
-
         Debug.DrawLine(transform.position, player.transform.position, Color.white);
     }
 
