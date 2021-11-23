@@ -936,6 +936,7 @@ MonoBehaviour:
   planetSize: 15
   flatShaded: 1
   planetLayer: Planet
+  vertexColorMaterial: {fileID: 2100000, guid: c3fd4f2a4ebcc5649a74488c93cf94d5, type: 2}
   onPlanetFinishedGeneration:
     m_PersistentCalls:
       m_Calls: []
