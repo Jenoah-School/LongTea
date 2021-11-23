@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: Mushroom_Biome
   m_EditorClassIdentifier: 
   planetMaterial: {fileID: 2100000, guid: c3fd4f2a4ebcc5649a74488c93cf94d5, type: 2}
-  noiseScale: 0.4
+  noiseScale: 0.5
   vegetationAmount: 15
   vegetation:
   - {fileID: 11400000, guid: d6ac466e157019c42aa8026b8382abf9, type: 2}
   - {fileID: 11400000, guid: 7b733b2fb28c8854eae6c8749645a700, type: 2}
   - {fileID: 11400000, guid: c4774d6f29a098e40a6fc792372343ed, type: 2}
-  noColliderAmount: 150
+  noColliderAmount: 100
   noColliderObjects:
-  - {fileID: 11400000, guid: 44cbd6ead8c0e1d48aaac59ec76e6cd5, type: 2}
+  - {fileID: 11400000, guid: 13ea80a3ae9a79948b7eadeefe25b310, type: 2}
+  - {fileID: 11400000, guid: 90f52dd366639964e80f554d57617d29, type: 2}
+  - {fileID: 11400000, guid: ce7a708401ca0c34ebd3d54de9b1b093, type: 2}
+  - {fileID: 11400000, guid: a39007a241811ee418299356afca2e54, type: 2}
+  - {fileID: 11400000, guid: 214e2fa77948e594da97236db13ee3e7, type: 2}
+  - {fileID: 11400000, guid: bfdb60ca35ed2ca45bf9baa07cc6e54e, type: 2}
+  - {fileID: 11400000, guid: ed9f8332f4740f74ea70b641a8ec760a, type: 2}
   resourceAmount: 4
   resources:
   - {fileID: 11400000, guid: 3be07c4ca4026bd4a929ad3eca3c4ce9, type: 2}
