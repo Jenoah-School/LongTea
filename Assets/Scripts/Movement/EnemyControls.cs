@@ -13,12 +13,12 @@ public class EnemyControls : MonoBehaviour
 
     float fieldOfView = 90;
 
-    float detectionDistance = 15;
+    float detectionDistance = 10;
 
     bool canStartRoaming;
 
     //Set to 0 so he chooses direction before walking
-    float roamingDelay = 1;
+    float roamingDelay = 0;
 
     Vector3 moveDirection;
     Vector3 currentDirection;
@@ -75,7 +75,7 @@ public class EnemyControls : MonoBehaviour
 
         yield return new WaitForSeconds(roamingDelay);
 
-        roamingDelay = Random.Range(1f, 3f);     
+        roamingDelay = Random.Range(2.5f, 5f);     
 
         lookDirection = Quaternion.AngleAxis(rotationAngle, transform.up) * transform.forward;
         currentDirection = Vector3.zero;

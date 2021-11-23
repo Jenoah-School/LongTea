@@ -4,7 +4,7 @@ using UnityEngine;
 using Lean.Pool;
 
 [RequireComponent(typeof(AudioSource))]
-public class PlayerShooter : MonoBehaviour
+public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private AudioClip shotSound = null;
