@@ -58,4 +58,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed9f8332f4740f74ea70b641a8ec760a, type: 2}
   resourceAmount: 4
   resources:
-  - {fileID: 11400000, guid: 3be07c4ca4026bd4a929ad3eca3c4ce9, type: 2}
+  - {fileID: 11400000, guid: 7d8ffc23ba517054c9e1d67567e58abb, type: 2}
