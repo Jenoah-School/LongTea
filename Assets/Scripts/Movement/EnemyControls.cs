@@ -4,16 +4,22 @@ using DG.Tweening;
 
 public class EnemyControls : MonoBehaviour
 {
+    enum enemyType { shooter, brawler }
+
+    enemyType type;
+
+    public bool canShootPlayer;
+
     private Rigidbody rb;
 
     float moveSpeed = 5f;
     float rotateSpeed = 90;
 
-    float stoppingDistance;
+    float stoppingDistance = 0;
 
     float fieldOfView = 90;
 
-    float detectionDistance = 10;
+    float detectionDistance = 15;
 
     bool canStartRoaming;
 
@@ -36,9 +42,10 @@ public class EnemyControls : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(RoamingMode());
-
         rotationAngle = Random.Range(0, 360);
+
+        StartCoroutine(RoamingMode());
+        SetEnemyType();
     }
 
     void FixedUpdate()
@@ -65,6 +72,20 @@ public class EnemyControls : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + lookDirection, Color.yellow);
         Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red);
         Debug.DrawLine(transform.position, player.transform.position, Color.white);
+    }
+
+    void SetEnemyType()
+    {
+        int randomInt = Random.Range(0, 2);
+        type = randomInt == 1 ? enemyType.brawler : enemyType.shooter;
+
+        type = enemyType.shooter;
+
+        if(type == enemyType.shooter)
+        {
+            Debug.Log("Shooter");
+            stoppingDistance = 10;
+        }
     }
 
     IEnumerator RoamingMode()
@@ -123,15 +144,24 @@ public class EnemyControls : MonoBehaviour
             if (hasDetectedPlayer)
             {
                 //Set the look direction of the enemy pointing to the player, on the plane of the forward vector
-
                 if (!Physics.Raycast(transform.position, player.transform.position - transform.position, detectionDistance, ~detectionIgnoreLayers))
                 {
                     Vector3 differenceVector = player.transform.position - transform.position;
                     lookDirection = Vector3.ProjectOnPlane(differenceVector.normalized, transform.up);
+                    if(type == enemyType.shooter && Vector3.Distance(transform.position, player.transform.position) < stoppingDistance)
+                    {
+                        canShootPlayer = true;
+                    }
+                    else
+                    {
+                        canShootPlayer = false;
+                        
+                    }
                     currentDirection = new Vector3(0, 0, 1);
                 }
                 else
                 {
+                    Debug.Log("doi");
                     if(Vector3.Dot(transform.right, player.transform.position - transform.position) > 0)
                     {
                         rotationAngle = 350;
@@ -182,6 +212,14 @@ public class EnemyControls : MonoBehaviour
     {
         return Vector3.SqrMagnitude(v1 - v2) < 0.0001f;
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.CompareTag("Player"))
+        {
+            collision.transform.GetComponent<EntityHealth>().DealDamage(1);
+            //Do damage to player
+        }
+    }
 
 }

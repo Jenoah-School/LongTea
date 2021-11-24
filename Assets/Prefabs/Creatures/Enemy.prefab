@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3394111841084386818}
   - component: {fileID: 3394111841084386817}
   - component: {fileID: 3394111841084386847}
+  - component: {fileID: 8421889038893724097}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -142,9 +143,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380829e1c56548c40b8c14923314fceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canShootPlayer: 0
   detectionIgnoreLayers:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 960
+--- !u!114 &8421889038893724097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394111841084386816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3abfba9fc977a48a92a2355329e5ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 0}
+  shotSound: {fileID: 0}
+  forwardForward: {fileID: 0}
+  cooldown: 0.5
 --- !u!1 &5390268111799651124
 GameObject:
   m_ObjectHideFlags: 0
