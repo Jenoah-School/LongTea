@@ -148,7 +148,7 @@ public class PlanetGeneration : MonoBehaviour
         for (int i = 0; i < mesh.vertices.Length; i++)
         {
             float distance = Vector3.Distance(planetDirection, mesh.vertices[i]);
-            float normalizedDistance = Mathf.InverseLerp(-currentBiome.noiseScale, currentBiome.noiseScale, planetSize - distance);
+            float normalizedDistance = Mathf.Clamp01(Mathf.InverseLerp(-currentBiome.noiseScale, currentBiome.noiseScale, planetSize - distance));
 
             colors[i] = currentBiome.heightGradient.Evaluate(normalizedDistance);
         }
@@ -347,6 +347,7 @@ public class PlanetGeneration : MonoBehaviour
                 spawnedObject.transform.rotation = Quaternion.LookRotation(potentialSpawnpoint - currentPlanet.transform.position, currentPlanet.transform.right);
                 spawnedObject.transform.localScale = Vector3.one * (1f + Random.Range(-sizeDifference, sizeDifference));
                 spawnedObject.transform.localRotation *= Quaternion.Euler(90, 0, 0);
+                spawnedObject.transform.Rotate(Vector3.up * Random.Range(0, 360f), Space.Self);
                 if (outputList != null) outputList.Add(spawnedObject);
                 return true;
             }
