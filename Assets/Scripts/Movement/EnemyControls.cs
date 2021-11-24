@@ -161,7 +161,6 @@ public class EnemyControls : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("doi");
                     if(Vector3.Dot(transform.right, player.transform.position - transform.position) > 0)
                     {
                         rotationAngle = 350;

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2668979045287208069}
   - component: {fileID: 8278606849893676187}
   - component: {fileID: 6397087670941612802}
-  - component: {fileID: 8495854672080708966}
   m_Layer: 0
   m_Name: Resource 1
   m_TagString: Resource
@@ -136,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderers:
-  - {fileID: 0}
+  - {fileID: 2594232085902585576}
   colliders: []
   rootObject: {fileID: 166964088187044363}
   disableCollisionOnGrow: 1
@@ -251,38 +250,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8495854672080708966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 166964088187044363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d74f34d181396fc49840a5a48117cddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderers:
-  - {fileID: 0}
-  colliders: []
-  rootObject: {fileID: 166964088187044363}
-  disableCollisionOnGrow: 1
-  destroyAfterFade: 1
-  growTarget: 2.5
-  shrinkTarget: 0.5
-  squishTarget: 0.2
-  shakeStrength: 0.5
-  targetOffset: {x: 0, y: 20, z: 0}
-  colorTarget: {r: 2.6390157, g: 0.4994998, b: 0, a: 1}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  maxGroundDistance: 100
-  groundOffset: {x: 0, y: 1, z: 0}
-  onHitGround:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1465946197395261063
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,5 +498,10 @@ PrefabInstance:
 --- !u!4 &3768312818231350663 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7660c4300c303d24d81c5eea930ff16c, type: 3}
+  m_PrefabInstance: {fileID: 3729268527195386476}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2594232085902585576 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 7660c4300c303d24d81c5eea930ff16c, type: 3}
   m_PrefabInstance: {fileID: 3729268527195386476}
   m_PrefabAsset: {fileID: 0}
