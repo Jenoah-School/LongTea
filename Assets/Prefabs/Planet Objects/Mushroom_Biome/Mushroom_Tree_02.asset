@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f715f092888c7984b8d5af2482456ace, type: 3}
   m_Name: Mushroom_Tree_02
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 7118315964967010885, guid: 7ef7aaa15b5102b4bae853c55c94927d, type: 3}
+  objectPrefab: {fileID: 7330741756326189568, guid: 788eb009d5f66374cb573d91ad8d730a, type: 3}
   objectScaleMargin: 0.1
   objectRadius: 3
