@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5851619048299501920}
   - component: {fileID: 5338390994798760671}
   - component: {fileID: 6269374028102905191}
-  - component: {fileID: 2051394695239457496}
   m_Layer: 0
   m_Name: Mushroom_Mineral_01
   m_TagString: Untagged
@@ -171,41 +170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderers:
-  - {fileID: 166964088881857799, guid: e356199faf7418e47b009c715a5c13fa, type: 3}
+  - {fileID: 2772522239391141201}
   colliders: []
-  rootObject: {fileID: 166964088187044363, guid: e356199faf7418e47b009c715a5c13fa, type: 3}
-  disableCollisionOnGrow: 1
-  destroyAfterFade: 1
-  growTarget: 2.5
-  shrinkTarget: 0.5
-  squishTarget: 0.2
-  shakeStrength: 0.5
-  targetOffset: {x: 0, y: 20, z: 0}
-  colorTarget: {r: 2.6390157, g: 0.4994998, b: 0, a: 1}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  maxGroundDistance: 100
-  groundOffset: {x: 0, y: 1, z: 0}
-  onHitGround:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2051394695239457496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4429578553539439748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d74f34d181396fc49840a5a48117cddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderers:
-  - {fileID: 166964088881857799, guid: e356199faf7418e47b009c715a5c13fa, type: 3}
-  colliders: []
-  rootObject: {fileID: 166964088187044363, guid: e356199faf7418e47b009c715a5c13fa, type: 3}
+  rootObject: {fileID: 4429578553539439748}
   disableCollisionOnGrow: 1
   destroyAfterFade: 1
   growTarget: 2.5
