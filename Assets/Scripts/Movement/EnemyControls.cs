@@ -10,33 +10,23 @@ public class EnemyControls : MonoBehaviour
 
     public bool canShootPlayer;
 
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float fieldOfView = 90;
+    [SerializeField] private float detectionDistance = 15;
+    [SerializeField] private LayerMask detectionIgnoreLayers;
+
     private Rigidbody rb;
+    private float stoppingDistance = 0;
+    private float roamingDelay = 0;
+    private float rotateSpeed = 90;
+    private float rotationAngle;
+    private bool canStartRoaming;
+    private bool hasDetectedPlayer;
+    private GameObject player;
+    private Vector3 moveDirection;
+    private Vector3 currentDirection;
+    private Vector3 lookDirection;
 
-    float moveSpeed = 5f;
-    float rotateSpeed = 90;
-
-    float stoppingDistance = 0;
-
-    float fieldOfView = 90;
-
-    float detectionDistance = 15;
-
-    bool canStartRoaming;
-
-    //Set to 0 so he chooses direction before walking
-    float roamingDelay = 0;
-
-    Vector3 moveDirection;
-    Vector3 currentDirection;
-    Vector3 lookDirection;
-
-    bool hasDetectedPlayer;
-
-    float rotationAngle;
-
-    public LayerMask detectionIgnoreLayers;
-
-    GameObject player;
 
     void Start()
     {
@@ -90,6 +80,7 @@ public class EnemyControls : MonoBehaviour
 
     IEnumerator RoamingMode()
     {
+        canShootPlayer = false;
         rotateSpeed = 90;
         currentDirection = new Vector3(0, 0, 1);
 

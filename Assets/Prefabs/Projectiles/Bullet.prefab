@@ -238,6 +238,7 @@ MonoBehaviour:
   moveSpeed: 1024
   planetSize: 15
   destroySound: {fileID: 8300000, guid: 1491f682a727934478a23d944118a800, type: 3}
+  trailRenderer: {fileID: 5516860294690217790}
 --- !u!135 &5911438335370407840
 SphereCollider:
   m_ObjectHideFlags: 0

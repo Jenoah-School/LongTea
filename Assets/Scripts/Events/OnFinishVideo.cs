@@ -16,6 +16,7 @@ public class OnFinishVideo : MonoBehaviour
     void Start()
     {
         videoPlayer = GetComponent<VideoPlayer>();
+        if (videoPlayer.targetCamera == null) videoPlayer.targetCamera = Camera.main;
         videoLength = ((float)videoPlayer.length);
     }
 

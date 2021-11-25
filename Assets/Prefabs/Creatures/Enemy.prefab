@@ -145,6 +145,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canShootPlayer: 0
+  moveSpeed: 5
+  rotateSpeed: 90
+  fieldOfView: 150
+  detectionDistance: 15
   detectionIgnoreLayers:
     serializedVersion: 2
     m_Bits: 960
@@ -163,7 +167,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6094281710851029935, guid: e6b053696cc4d094e8aa27ec27fd81c5, type: 3}
   shotSound: {fileID: 8300000, guid: 74835cdcb22f2534e977b07640ebcfca, type: 3}
   forwardForward: {fileID: 0}
-  cooldown: 0.5
+  cooldown: 2
+  bulletOffsetMultiplier: 2
 --- !u!82 &686501978
 AudioSource:
   m_ObjectHideFlags: 0

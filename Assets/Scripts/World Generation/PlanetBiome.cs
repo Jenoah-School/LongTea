@@ -7,6 +7,10 @@ public class PlanetBiome : ScriptableObject
 {
     public Gradient heightGradient = new Gradient();
     [Range(0f, 2f)] public float noiseScale = 0.4f;
+
+    [Header("Spawn objects")]
+    public List<PlanetObject> enemies = new List<PlanetObject>();
+    public int enemyCount = 3;
     [Space(20)]
     public int vegetationAmount = 20;
     public List<PlanetObject> vegetation = new List<PlanetObject>();
