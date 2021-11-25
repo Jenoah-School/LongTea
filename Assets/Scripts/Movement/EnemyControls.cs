@@ -79,18 +79,20 @@ public class EnemyControls : MonoBehaviour
         int randomInt = Random.Range(0, 2);
         type = randomInt == 1 ? enemyType.brawler : enemyType.shooter;
 
-        type = enemyType.shooter;
-
         if(type == enemyType.shooter)
         {
-            Debug.Log("Shooter");
             stoppingDistance = 10;
+        }
+        else
+        {
+            moveSpeed = 12f;
         }
     }
 
     IEnumerator RoamingMode()
     {
         rotateSpeed = 90;
+        canShootPlayer = false;
         currentDirection = new Vector3(0, 0, 1);
 
         yield return new WaitForSeconds(roamingDelay);
@@ -161,7 +163,6 @@ public class EnemyControls : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("doi");
                     if(Vector3.Dot(transform.right, player.transform.position - transform.position) > 0)
                     {
                         rotationAngle = 350;
