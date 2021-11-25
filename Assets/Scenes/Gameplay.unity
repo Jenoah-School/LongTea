@@ -1300,6 +1300,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8033981344759042704, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
   m_PrefabInstance: {fileID: 8033981345626541517}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1425197756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1157407899, guid: e61999812890cef418375fc0b79e923b, type: 3}
+  m_PrefabInstance: {fileID: 1435552540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1435552540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1507,6 +1518,10 @@ PrefabInstance:
       propertyPath: OnResume.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 847796962}
+    - target: {fileID: 5079576613397785243, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5079576613397785244, guid: e61999812890cef418375fc0b79e923b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1728,12 +1743,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42844a4fccbd54746b90cade4ff70f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2004778304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5079576613397785239, guid: e61999812890cef418375fc0b79e923b, type: 3}
+  m_PrefabInstance: {fileID: 1435552540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2004778307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004778304}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fffc86ba643e16488f6091ca6354040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keys: 0d000000
+  OnKeyPress:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1425197756}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2071485168 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5079576613397785240, guid: e61999812890cef418375fc0b79e923b, type: 3}
   m_PrefabInstance: {fileID: 1435552540}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2004778304}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec22e7a3014fe3d499a58adb74685e2d, type: 3}
