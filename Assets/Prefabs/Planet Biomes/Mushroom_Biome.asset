@@ -44,7 +44,7 @@ MonoBehaviour:
   noiseScale: 0.5
   enemies:
   - {fileID: 11400000, guid: d9bb0ec5929db4c47b225b5268f7947d, type: 2}
-  enemyCount: 3
+  enemyCount: 0
   vegetationAmount: 15
   vegetation:
   - {fileID: 11400000, guid: d6ac466e157019c42aa8026b8382abf9, type: 2}
@@ -55,10 +55,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 13ea80a3ae9a79948b7eadeefe25b310, type: 2}
   - {fileID: 11400000, guid: 90f52dd366639964e80f554d57617d29, type: 2}
   - {fileID: 11400000, guid: ce7a708401ca0c34ebd3d54de9b1b093, type: 2}
+  - {fileID: 11400000, guid: ed9f8332f4740f74ea70b641a8ec760a, type: 2}
   - {fileID: 11400000, guid: a39007a241811ee418299356afca2e54, type: 2}
   - {fileID: 11400000, guid: 214e2fa77948e594da97236db13ee3e7, type: 2}
   - {fileID: 11400000, guid: bfdb60ca35ed2ca45bf9baa07cc6e54e, type: 2}
-  - {fileID: 11400000, guid: ed9f8332f4740f74ea70b641a8ec760a, type: 2}
   resourceAmount: 4
   resources:
-  - {fileID: 11400000, guid: 7d8ffc23ba517054c9e1d67567e58abb, type: 2}
+  - {fileID: 11400000, guid: 9515f0187f25b23468496954e595a090, type: 2}
+  - {fileID: 11400000, guid: 0948ca0908041f446af1a26de3fade54, type: 2}
