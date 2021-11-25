@@ -16,6 +16,19 @@ public class EntityHealth : MonoBehaviour
     {
         startHealth = health;
     }
+    public void SetHealth(float newHealth)
+    {
+        health = newHealth;
+        if (health <= 0)
+        {
+            OnDeath.Invoke();
+            isDead = true;
+        }
+        else
+        {
+            isDead = false;
+        }
+    }
 
     public virtual void DealDamage(float damageAmount)
     {

@@ -11,6 +11,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private Transform forwardForward = null;
     [SerializeField] private Joystick shootingJoystick;
     [SerializeField] private float cooldown = 0.5f;
+    [SerializeField] private float bulletOffsetMultiplier = 2f;
 
     private AudioSource audioSource = null;
     private float nextShootTime = 0f;
@@ -42,8 +43,8 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) || (shootingJoystick != null && canShoot))
         {
             if (Time.time < nextShootTime) return;
-            GameObject bulletClone = LeanPool.Spawn(bulletPrefab, null, true);
-            bulletClone.transform.position = transform.position + forwardForward.forward;
+            GameObject bulletClone = LeanPool.Spawn(bulletPrefab, PlanetManager.instance.GetPlanet().transform, true);
+            bulletClone.transform.position = transform.position + forwardForward.forward * bulletOffsetMultiplier;
             bulletClone.transform.rotation = forwardForward.rotation;
 
             nextShootTime = Time.time + cooldown;

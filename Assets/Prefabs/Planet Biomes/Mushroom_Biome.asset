@@ -42,6 +42,9 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   noiseScale: 0.5
+  enemies:
+  - {fileID: 11400000, guid: d9bb0ec5929db4c47b225b5268f7947d, type: 2}
+  enemyCount: 3
   vegetationAmount: 15
   vegetation:
   - {fileID: 11400000, guid: d6ac466e157019c42aa8026b8382abf9, type: 2}
@@ -58,4 +61,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed9f8332f4740f74ea70b641a8ec760a, type: 2}
   resourceAmount: 4
   resources:
-  - {fileID: 11400000, guid: 3be07c4ca4026bd4a929ad3eca3c4ce9, type: 2}
+  - {fileID: 11400000, guid: 7d8ffc23ba517054c9e1d67567e58abb, type: 2}

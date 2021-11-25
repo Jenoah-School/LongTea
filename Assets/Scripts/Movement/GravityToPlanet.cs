@@ -10,11 +10,21 @@ public class GravityToPlanet : MonoBehaviour
     [SerializeField] private bool rotateToPlanet = true;
 
     private Rigidbody rb = null;
+    private bool hasInitialized = false;
 
     void Start()
     {
         planet ??= PlanetManager.instance.GetPlanet().transform;
         rb = GetComponent<Rigidbody>();
+        Invoke("Initialize", 0.2f);
+    }
+
+    void Initialize()
+    {
+        if(planet == null)
+        {
+            planet = PlanetManager.instance.GetPlanet().transform;
+        }
     }
 
     void FixedUpdate()

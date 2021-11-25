@@ -9,6 +9,7 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float planetSize = 5f;
     [SerializeField] private AudioClip destroySound = null;
+    [SerializeField] private TrailRenderer trailRenderer = null;
 
     private PlanetInfo planetInfo;
 
@@ -16,6 +17,11 @@ public class BulletBehaviour : MonoBehaviour
     {
         planetInfo = PlanetManager.instance.GetPlanet();
         planetSize = planetInfo.GetPlanetSize();
+    }
+
+    private void OnEnable()
+    {
+        trailRenderer.Clear();
     }
 
     void Update()

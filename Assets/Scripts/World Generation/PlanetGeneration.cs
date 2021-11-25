@@ -14,7 +14,6 @@ public class PlanetGeneration : MonoBehaviour
 
     [Header("Finish")]
     [SerializeField] private UnityEvent onPlanetFinishedGeneration;
-    [SerializeField] private bool bringBackPlayer = false;
 
     [Header("Structures")]
     [SerializeField] private LayerMask structureIgnoreLayers;
@@ -33,6 +32,7 @@ public class PlanetGeneration : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private List<PlanetInfo> planets = new List<PlanetInfo>();
     [SerializeField] private List<GameObject> placedResources = new List<GameObject>();
+    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
 
     private GameObject currentPlanet = null;
     private PlanetBiome currentBiome = null;
@@ -82,7 +82,7 @@ public class PlanetGeneration : MonoBehaviour
         planetInfo.SetPlanetSize(planetSize);
 
         PlanetObject resourceObject = currentBiome.resources[Random.Range(0, currentBiome.resources.Count)];
-        StartCoroutine(SpawnObjects(resourceObject, currentBiome.resourceAmount, placedResources, UpdateResourceCount));
+        StartCoroutine(SpawnObjects(resourceObject, currentBiome.resourceAmount, placedResources, PlaceEnemies));
 
         PlaceColliderlessObjects();
 
@@ -304,6 +304,12 @@ public class PlanetGeneration : MonoBehaviour
         mesh.vertices = vertices;
     }
 
+    private void PlaceEnemies()
+    {
+
+        StartCoroutine(SpawnObjects(currentBiome.enemies, currentBiome.enemyCount, enemies, UpdateResourceCount));
+    }
+
     private void UpdateResourceCount()
     {
         planets[0].SetResourceAmount(placedResources.Count);
@@ -315,6 +321,7 @@ public class PlanetGeneration : MonoBehaviour
     {
         onPlanetFinishedGeneration.Invoke();
     }
+
     private void PlaceColliderlessObjects()
     {
         if (currentBiome.noColliderAmount <= 0 || currentBiome.noColliderObjects.Count <= 0) return;
@@ -375,15 +382,17 @@ public class PlanetGeneration : MonoBehaviour
 
     IEnumerator SpawnObjects(List<PlanetObject> planetObject, int spawnAmount = 5, List<GameObject> outputList = null, System.Action finishedAction = null, float finsishedActionDelay = 0f)
     {
-        
-        for (int i = 0; i < spawnAmount; i++)
+        if (planetObject.Count > 0)
         {
-            PlanetObject objectToSpawn = planetObject[Random.Range(0, planetObject.Count)];
-            if (!SpawnOnRandomPosition(objectToSpawn.objectPrefab, objectToSpawn.objectRadius, outputList, objectToSpawn.objectScaleMargin))
+            for (int i = 0; i < spawnAmount; i++)
             {
-                Debug.Log($"Unable to spawn object '{objectToSpawn.objectPrefab.name}'");
+                PlanetObject objectToSpawn = planetObject[Random.Range(0, planetObject.Count)];
+                if (!SpawnOnRandomPosition(objectToSpawn.objectPrefab, objectToSpawn.objectRadius, outputList, objectToSpawn.objectScaleMargin))
+                {
+                    Debug.Log($"Unable to spawn object '{objectToSpawn.objectPrefab.name}'");
+                }
+                yield return new WaitForEndOfFrame();
             }
-            yield return new WaitForEndOfFrame();
         }
 
         if (finishedAction != null)
