@@ -69,12 +69,13 @@ public class EnemyControls : MonoBehaviour
         int randomInt = Random.Range(0, 2);
         type = randomInt == 1 ? enemyType.brawler : enemyType.shooter;
 
-        type = enemyType.shooter;
-
         if(type == enemyType.shooter)
         {
-            Debug.Log("Shooter");
             stoppingDistance = 10;
+        }
+        else
+        {
+            moveSpeed = 12f;
         }
     }
 
@@ -82,6 +83,7 @@ public class EnemyControls : MonoBehaviour
     {
         canShootPlayer = false;
         rotateSpeed = 90;
+        canShootPlayer = false;
         currentDirection = new Vector3(0, 0, 1);
 
         yield return new WaitForSeconds(roamingDelay);
