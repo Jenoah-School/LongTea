@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class DynamicJoystick : Joystick
 {
@@ -13,19 +15,40 @@ public class DynamicJoystick : Joystick
     {
         MoveThreshold = moveThreshold;
         base.Start();
-        background.gameObject.SetActive(false);
+        if (backgroundImage != null)
+        {
+            backgroundImage.CrossFadeAlpha(0, 0.2f, false);
+        }
+        else
+        {
+            background.gameObject.SetActive(false);
+        }
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
         background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
-        background.gameObject.SetActive(true);
+        if (backgroundImage != null)
+        {
+            backgroundImage.CrossFadeAlpha(255, 0.2f, false);
+        }
+        else
+        {
+            background.gameObject.SetActive(true);
+        }
         base.OnPointerDown(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        background.gameObject.SetActive(false);
+        if (backgroundImage != null)
+        {
+            backgroundImage.CrossFadeAlpha(0, 0.2f, false);
+        }
+        else
+        {
+            background.gameObject.SetActive(false);
+        }
         base.OnPointerUp(eventData);
     }
 

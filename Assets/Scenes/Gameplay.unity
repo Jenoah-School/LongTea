@@ -1255,7 +1255,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
   m_PrefabInstance: {fileID: 8033981345626541517}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931699593}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7770b5733ab64e4aa3423da74b88858, type: 3}
@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8033981346406143763, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
   m_PrefabInstance: {fileID: 8033981345626541517}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931699593}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d74f34d181396fc49840a5a48117cddb, type: 3}
@@ -1277,7 +1277,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8033981346406143789, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
   m_PrefabInstance: {fileID: 8033981345626541517}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931699593}
+  m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e9818dba3d797447bec6afe4f777cdf, type: 3}
@@ -1288,7 +1288,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8033981346406143788, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
   m_PrefabInstance: {fileID: 8033981345626541517}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931699593}
+  m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d860dfe3c14b9ad4daa61f83886784c1, type: 3}
@@ -1299,7 +1299,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8033981346406143791, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
   m_PrefabInstance: {fileID: 8033981345626541517}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931699593}
+  m_GameObject: {fileID: 0}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0de37ddea8f4a744ea2a7222a876f196, type: 3}
@@ -2251,27 +2251,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1931699593 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8033981346406143761, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+--- !u!114 &1931699594 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1931699594, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
   m_PrefabInstance: {fileID: 8033981345626541517}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1931699594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931699593}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7807359956fe1b24691c353c5b184985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyRadius: 10
-  tagsOfObjectToDestroy:
-  - Bullet
-  - Enemy
 --- !u!114 &1952933745 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8332271529883523360, guid: e61999812890cef418375fc0b79e923b, type: 3}
@@ -2584,14 +2574,6 @@ PrefabInstance:
     - target: {fileID: 8033981346406143761, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8033981346406143763, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
-      propertyPath: onHitGround.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8033981346406143763, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
-      propertyPath: onHitGround.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8033981346406143784, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: m_RootOrder

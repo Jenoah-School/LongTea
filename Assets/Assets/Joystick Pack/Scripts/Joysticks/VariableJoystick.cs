@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class VariableJoystick : Joystick
 {
@@ -15,13 +16,26 @@ public class VariableJoystick : Joystick
     public void SetMode(JoystickType joystickType)
     {
         this.joystickType = joystickType;
-        if(joystickType == JoystickType.Fixed)
+        if (joystickType == JoystickType.Fixed)
         {
             background.anchoredPosition = fixedPosition;
             background.gameObject.SetActive(true);
         }
         else
-            background.gameObject.SetActive(false);
+        {
+            if (backgroundImage != null)
+            {
+                backgroundImage.DOFade(.2f, 0.3f);
+            }
+            else
+            {
+                background.gameObject.SetActive(false);
+            }
+            if (handleImage != null)
+            {
+                handleImage.DOFade(.2f, 0.3f);
+            }
+        }
     }
 
     protected override void Start()
@@ -33,18 +47,42 @@ public class VariableJoystick : Joystick
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if(joystickType != JoystickType.Fixed)
+        if (joystickType != JoystickType.Fixed)
         {
             background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
-            background.gameObject.SetActive(true);
+            if (backgroundImage != null)
+            {
+                backgroundImage.DOFade(1f, 0.3f);
+            }
+            else
+            {
+                background.gameObject.SetActive(true);
+            }
+            if (handleImage != null)
+            {
+                handleImage.DOFade(1f, 0.3f);
+            }
         }
         base.OnPointerDown(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        if(joystickType != JoystickType.Fixed)
-            background.gameObject.SetActive(false);
+        if (joystickType != JoystickType.Fixed)
+        {
+            if (backgroundImage != null)
+            {
+                backgroundImage.DOFade(.2f, 0.3f);
+            }
+            else
+            {
+                background.gameObject.SetActive(false);
+            }
+            if (handleImage != null)
+            {
+                handleImage.DOFade(.2f, 0.3f);
+            }
+        }
 
         base.OnPointerUp(eventData);
     }
