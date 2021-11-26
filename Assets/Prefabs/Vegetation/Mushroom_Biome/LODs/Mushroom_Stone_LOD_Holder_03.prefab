@@ -114,6 +114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushroom_Stone_03
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2b54c45374c9f4345971bef1af8ce11a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b54c45374c9f4345971bef1af8ce11a, type: 3}
 --- !u!4 &6047843542647447105 stripped

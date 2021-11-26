@@ -75,7 +75,7 @@ public class EnemyControls : MonoBehaviour
         }
         else
         {
-            moveSpeed = 12f;
+            moveSpeed *= 1.25f;
         }
     }
 

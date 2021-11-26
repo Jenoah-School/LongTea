@@ -114,6 +114,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushroom_Grass_04
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a6e6ba6dc46566d4788b84f1c1025424, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6e6ba6dc46566d4788b84f1c1025424, type: 3}
 --- !u!4 &2681466121877897016 stripped
