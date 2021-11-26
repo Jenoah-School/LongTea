@@ -9,6 +9,6 @@ public class FPSCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textField.text = "" + (int)(1f / Time.unscaledDeltaTime);
+        if(Time.frameCount % 10 == 0) textField.text = "FPS: " + ((int)(1f / Time.unscaledDeltaTime)).ToString();
     }
 }
