@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderers:
-  - {fileID: 0}
+  - {fileID: 8214300008669355180}
   colliders: []
   rootObject: {fileID: 2629818520787631481}
   disableCollisionOnGrow: 1
@@ -502,5 +502,10 @@ PrefabInstance:
 --- !u!4 &7040290095788091331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a2654980371a73a41a5cbbcdc7015f0a, type: 3}
+  m_PrefabInstance: {fileID: 7367497529838731304}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8214300008669355180 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: a2654980371a73a41a5cbbcdc7015f0a, type: 3}
   m_PrefabInstance: {fileID: 7367497529838731304}
   m_PrefabAsset: {fileID: 0}
