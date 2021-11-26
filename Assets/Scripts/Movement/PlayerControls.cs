@@ -19,6 +19,9 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Time.timeScale == 0) {
+            return;
+        }
         Vector3 moveDirection;
         if (movementJoystick == null || (movementJoystick != null && movementJoystick.Direction.SqrMagnitude() <= 0))
         {
