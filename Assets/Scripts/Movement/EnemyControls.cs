@@ -204,14 +204,4 @@ public class EnemyControls : MonoBehaviour
     {
         return Vector3.SqrMagnitude(v1 - v2) < 0.0001f;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.transform.CompareTag("Player"))
-        {
-            collision.transform.GetComponent<EntityHealth>().DealDamage(1);
-            //Do damage to player
-        }
-    }
-
 }

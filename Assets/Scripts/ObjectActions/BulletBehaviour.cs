@@ -8,8 +8,11 @@ public class BulletBehaviour : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float planetSize = 5f;
-    [SerializeField] private AudioClip destroySound = null;
+    
     [SerializeField] private TrailRenderer trailRenderer = null;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip hitSound = null;
 
     private PlanetInfo planetInfo;
 
@@ -37,21 +40,19 @@ public class BulletBehaviour : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //other.gameObject.SetActive(false);
-        if (destroySound != null)
-        {
-            AudioSource.PlayClipAtPoint(destroySound, transform.position);
-        }
+        
+
         Transform collidedTransform = collision.collider.transform;
-        if (collidedTransform.CompareTag("Enemy"))
-        {
-            collidedTransform.DOPunchScale(Vector3.one * 0.5f, 0.2f);
-            Destroy(collidedTransform.gameObject, .2f);
-        }
 
         if(collidedTransform.TryGetComponent(out EntityHealth entityHealth))
         {
             entityHealth.DealDamage(1);
         }
+        else if (hitSound != null)
+        {
+            AudioSource.PlayClipAtPoint(hitSound, transform.position);
+        }
+
         LeanPool.Despawn(gameObject);
     }
 }

@@ -299,8 +299,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1024
   planetSize: 15
-  destroySound: {fileID: 8300000, guid: 1491f682a727934478a23d944118a800, type: 3}
   trailRenderer: {fileID: 5516860294690217790}
+  hitSound: {fileID: 8300000, guid: 9b15ffa178e731a4aaa666da5ffa16f3, type: 3}
 --- !u!135 &5911438335370407840
 SphereCollider:
   m_ObjectHideFlags: 0

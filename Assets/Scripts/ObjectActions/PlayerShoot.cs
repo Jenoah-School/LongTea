@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
 public class PlayerShoot : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private Joystick shootingJoystick;
     [SerializeField] private float cooldown = 0.5f;
     [SerializeField] private float bulletOffsetMultiplier = 2f;
+    [SerializeField] private UnityEvent onShoot;
 
     private AudioSource audioSource = null;
     private float nextShootTime = 0f;
@@ -58,6 +60,8 @@ public class PlayerShoot : MonoBehaviour
                 audioSource.pitch = Random.Range(0.8f, 1.2f);
                 audioSource.PlayOneShot(shotSound);
             }
+
+            onShoot.Invoke();
         }
 
         

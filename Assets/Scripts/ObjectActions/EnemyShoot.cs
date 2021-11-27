@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using UnityEngine.Events;
 
 public class EnemyShoot : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class EnemyShoot : MonoBehaviour
     [SerializeField] private Transform forwardForward = null;
     [SerializeField] private float cooldown = 0.5f;
     [SerializeField] private float bulletOffsetMultiplier = 2f;
+    [SerializeField] private UnityEvent onMelee;
 
     private AudioSource audioSource = null;
     private float nextShootTime = 0f;
     private EnemyControls EC;
+    private EntityHealth playerEntityHealth = null;
 
     bool previousFrame;
 
@@ -22,7 +25,10 @@ public class EnemyShoot : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (forwardForward == null) forwardForward = transform;
 
-        EC = this.gameObject.GetComponent<EnemyControls>(); 
+        EC = this.gameObject.GetComponent<EnemyControls>();
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null) playerEntityHealth = player.GetComponent<EntityHealth>();
     }
 
     void Update()
@@ -47,5 +53,14 @@ public class EnemyShoot : MonoBehaviour
                 audioSource.PlayOneShot(shotSound);
             }
         }       
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (playerEntityHealth != null && collision.transform == playerEntityHealth.transform && Time.time > nextShootTime)
+        {
+            nextShootTime = Time.time + cooldown;
+            playerEntityHealth.DealDamage(1);
+            onMelee.Invoke();
+        }
     }
 }
