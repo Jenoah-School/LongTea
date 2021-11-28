@@ -81,8 +81,7 @@ public class PlanetGeneration : MonoBehaviour
         planets.Add(planetInfo);
         planetInfo.SetPlanetSize(planetSize);
 
-        PlanetObject resourceObject = currentBiome.resources[Random.Range(0, currentBiome.resources.Count)];
-        StartCoroutine(SpawnObjects(resourceObject, currentBiome.resourceAmount, placedResources, PlaceEnemies));
+        StartCoroutine(SpawnObjects(currentBiome.resources, currentBiome.resourceAmount, placedResources, PlaceEnemies));
 
         PlaceColliderlessObjects();
 
@@ -313,7 +312,7 @@ public class PlanetGeneration : MonoBehaviour
     private void UpdateResourceCount()
     {
         planets[0].SetResourceAmount(placedResources.Count);
-        ScoreManager.instance.SetTotalScore(placedResources.Count);
+        ScoreManager.instance.IncreaseTotalScore(placedResources.Count);
         StartCoroutine(SpawnObjects(currentBiome.vegetation, currentBiome.vegetationAmount, null, EndGeneration, .5f));
     }
 

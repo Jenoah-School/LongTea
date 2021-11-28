@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8062177733107201165}
   - component: {fileID: 4923835640065287919}
   - component: {fileID: 1736117499943076803}
+  - component: {fileID: 2635209887581655939}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -121,7 +122,7 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: d11ec9cb097ba0e4d8d954f2a262a817, type: 3}
   forwardForward: {fileID: 0}
   cooldown: 2
-  bulletOffsetMultiplier: 2
+  bulletOffsetMultiplier: 1.5
   onMelee:
     m_PersistentCalls:
       m_Calls:
@@ -336,6 +337,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2635209887581655939}
+        m_TargetAssemblyTypeName: EntityScore, Assembly-CSharp
+        m_MethodName: AddToScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8062177733107201165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,6 +405,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b9f271299087b4da8d7d78182b20ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2635209887581655939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394111841084386816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aef13c03de33284ca500f80372cf583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreAmount: 1
 --- !u!1 &4016888894299522363
 GameObject:
   m_ObjectHideFlags: 0

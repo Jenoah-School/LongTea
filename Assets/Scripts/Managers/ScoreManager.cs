@@ -45,6 +45,12 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreLabel();
         CheckScore();
     }
+    public void IncreaseTotalScore(int incrementAmount)
+    {
+        totalScore += incrementAmount;
+        UpdateScoreLabel();
+        CheckScore();
+    }
 
     public void IncreaseScore(int incrementAmount)
     {
