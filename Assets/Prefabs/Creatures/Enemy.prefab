@@ -104,6 +104,7 @@ MonoBehaviour:
   detectionIgnoreLayers:
     serializedVersion: 2
     m_Bits: 960
+  simpleAnimation: {fileID: 5787401883189792772}
 --- !u!114 &8421889038893724097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +296,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0.5
+          m_FloatArgument: 0.8
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -323,6 +324,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5787401883189792772}
+        m_TargetAssemblyTypeName: SimpleAnimation, Assembly-CSharp
+        m_MethodName: LayOnSide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8062177733107201165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db9a8da1b941774595717b3e7b5f754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0.5
+  waitTime: 1
   autoStart: 0
   timedEvent:
     m_PersistentCalls:
@@ -565,6 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7687855723139003156}
   - component: {fileID: 2263576910077689324}
+  - component: {fileID: 5787401883189792772}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -621,3 +635,85 @@ MonoBehaviour:
   onHitGround:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5787401883189792772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7301420326872329664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe57a6e462333245a9199df42dd7b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRotationAngle: 10
+  rotationAxis: {x: 0, y: 0, z: 1}
+  moveSpeed: 7.5
+  jumpHeight: 0.5
+  seed: 0
+  layGroundHeightOffset: 0.5
+  groundCheckDistance: 1.5
+  layDownSpeed: 0.5
+  groundCheckLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  moveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  isMoving: 0
+  moveUp: 1

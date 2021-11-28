@@ -14,6 +14,7 @@ public class EnemyControls : MonoBehaviour
     [SerializeField] private float fieldOfView = 90;
     [SerializeField] private float detectionDistance = 15;
     [SerializeField] private LayerMask detectionIgnoreLayers;
+    [SerializeField] private SimpleAnimation simpleAnimation;
 
     private Rigidbody rb;
     private float stoppingDistance = 0;
@@ -85,6 +86,7 @@ public class EnemyControls : MonoBehaviour
         rotateSpeed = 90;
         canShootPlayer = false;
         currentDirection = new Vector3(0, 0, 1);
+        if (simpleAnimation != null) simpleAnimation.StartMoving();
 
         yield return new WaitForSeconds(roamingDelay);
 
@@ -92,6 +94,7 @@ public class EnemyControls : MonoBehaviour
 
         lookDirection = Quaternion.AngleAxis(rotationAngle, transform.up) * transform.forward;
         currentDirection = Vector3.zero;
+        if (simpleAnimation != null) simpleAnimation.StopMoving();
 
         if (Physics.Raycast(transform.position, lookDirection, 8, ~detectionIgnoreLayers))
         {
@@ -151,6 +154,7 @@ public class EnemyControls : MonoBehaviour
                         
                     }
                     currentDirection = new Vector3(0, 0, 1);
+                    if (simpleAnimation != null) simpleAnimation.StartMoving();
                 }
                 else
                 {
