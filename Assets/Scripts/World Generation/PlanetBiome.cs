@@ -20,4 +20,7 @@ public class PlanetBiome : ScriptableObject
     [Space(20)]
     public int resourceAmount = 4;
     public List<PlanetObject> resources = new List<PlanetObject>();
+    [Space(20)]
+    public int mustSpawnedItemAmount = 1;
+    public List<PlanetObject> mustSpawnedItems = new List<PlanetObject>();
 }

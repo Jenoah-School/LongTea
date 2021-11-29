@@ -9,7 +9,7 @@ public class EntityScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoreManager.instance.IncreaseTotalScore(scoreAmount);
+        ScoreManager.instance.IncreaseTotalMinerals(1);
     }
 
     public void AddToScore()

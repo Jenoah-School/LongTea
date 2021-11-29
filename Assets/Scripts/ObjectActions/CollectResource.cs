@@ -14,6 +14,7 @@ public class CollectResource : MonoBehaviour
     [SerializeField] private UnityEvent onCollect = null;
     [SerializeField] private UnityEvent onEnterRadius = null;
     [SerializeField] private UnityEvent onExitRadius = null;
+    [SerializeField] private EntityScore entityScore = null;
 
     private bool isInRadius = false;
     private bool hasBeenCollected = false;
@@ -36,7 +37,14 @@ public class CollectResource : MonoBehaviour
             if(inRangeTimer >= requiredTimeToCollect)
             {
                 hasBeenCollected = true;
-                ScoreManager.instance.IncreaseScore(1);
+                if (entityScore != null)
+                {
+                    entityScore.AddToScore();
+                }
+                else
+                {
+                    ScoreManager.instance.IncreaseScore(1);
+                }
                 onCollect.Invoke();
             }
         }

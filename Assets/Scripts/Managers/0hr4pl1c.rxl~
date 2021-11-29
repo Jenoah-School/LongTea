@@ -10,8 +10,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance = null;
 
     [SerializeField] private int score = 0;
-    [SerializeField] private int totalMinerals = 0;
-    [SerializeField] private int mineralAmount = 0;
+    [SerializeField] private int totalScore = 0;
 
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -32,7 +31,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateMineralLabel();
+        UpdateScoreLabel();
     }
 
     public void SetScore(int newScore)
@@ -42,16 +41,16 @@ public class ScoreManager : MonoBehaviour
         CheckScore();
     }
 
-    public void SetTotalMinerals(int newTotalScore)
+    public void SetTotalScore(int newTotalScore)
     {
-        totalMinerals = newTotalScore;
-        UpdateMineralLabel();
+        totalScore = newTotalScore;
+        UpdateScoreLabel();
         CheckScore();
     }
-    public void IncreaseTotalMinerals(int incrementAmount)
+    public void IncreaseTotalScore(int incrementAmount)
     {
-        totalMinerals += incrementAmount;
-        UpdateMineralLabel();
+        totalScore += incrementAmount;
+        UpdateScoreLabel();
         CheckScore();
     }
 
@@ -62,9 +61,9 @@ public class ScoreManager : MonoBehaviour
         CheckScore();
     }
 
-    public int GetTotalMinerals()
+    public int GetTotalScore()
     {
-        return totalMinerals;
+        return totalScore;
     }
 
     public int GetScore()
@@ -72,25 +71,20 @@ public class ScoreManager : MonoBehaviour
         return score;
     }
 
-    public void CollectMineral()
+    public void UpdateScoreLabel()
     {
-        mineralAmount += 1;
-    }
-
-    public void UpdateMineralLabel()
-    {
-        scoreText.text = $"{mineralAmount}/{totalMinerals}";
+        scoreText.text = $"{score}/{totalScore}";
     }
 
     public void UpdateScoreLabelAnimated()
     {
-        scoreText.text = $"{score}/{totalMinerals}";
+        scoreText.text = $"{score}/{totalScore}";
         scoreText.rectTransform.DOPunchScale(Vector3.one * squishAmount, squishTime);
     }
 
     public void CheckScore()
     {
-        if(!maxScoreReached && score >= totalMinerals)
+        if(!maxScoreReached && score >= totalScore)
         {
             OnMaxScore.Invoke();
             maxScoreReached = true;

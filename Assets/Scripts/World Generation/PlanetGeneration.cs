@@ -81,7 +81,7 @@ public class PlanetGeneration : MonoBehaviour
         planets.Add(planetInfo);
         planetInfo.SetPlanetSize(planetSize);
 
-        StartCoroutine(SpawnObjects(currentBiome.resources, currentBiome.resourceAmount, placedResources, PlaceEnemies));
+        StartCoroutine(SpawnObjects(currentBiome.resources, currentBiome.resourceAmount, placedResources, PlaceMustSpawns));
 
         PlaceColliderlessObjects();
 
@@ -303,16 +303,20 @@ public class PlanetGeneration : MonoBehaviour
         mesh.vertices = vertices;
     }
 
+    private void PlaceMustSpawns()
+    {
+        StartCoroutine(SpawnObjects(currentBiome.mustSpawnedItems, currentBiome.mustSpawnedItemAmount, enemies, PlaceEnemies));
+    }
+
     private void PlaceEnemies()
     {
-
         StartCoroutine(SpawnObjects(currentBiome.enemies, currentBiome.enemyCount, enemies, UpdateResourceCount));
     }
 
     private void UpdateResourceCount()
     {
         planets[0].SetResourceAmount(placedResources.Count);
-        ScoreManager.instance.IncreaseTotalScore(placedResources.Count);
+        ScoreManager.instance.IncreaseTotalMinerals(placedResources.Count);
         StartCoroutine(SpawnObjects(currentBiome.vegetation, currentBiome.vegetationAmount, null, EndGeneration, .5f));
     }
 
