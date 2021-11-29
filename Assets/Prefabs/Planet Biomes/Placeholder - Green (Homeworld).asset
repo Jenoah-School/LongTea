@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca2a0ed5549d8c4d82db3fd8262592a, type: 3}
+  m_Name: Placeholder - Green (Homeworld)
+  m_EditorClassIdentifier: 
+  heightGradient:
+    serializedVersion: 2
+    key0: {r: 0.33047366, g: 0.4433962, b: 0.08533284, a: 1}
+    key1: {r: 0.81038004, g: 0.9433962, b: 0.24385896, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  noiseScale: 0.4
+  enemies:
+  - {fileID: 11400000, guid: d9bb0ec5929db4c47b225b5268f7947d, type: 2}
+  enemyCount: 0
+  vegetationAmount: 50
+  vegetation:
+  - {fileID: 11400000, guid: 57151642a6f2e8648af32aaf2979694b, type: 2}
+  - {fileID: 11400000, guid: 0aede59f8dab02a4cb9d0f2e841f57a8, type: 2}
+  noColliderAmount: 60
+  noColliderObjects:
+  - {fileID: 11400000, guid: 44cbd6ead8c0e1d48aaac59ec76e6cd5, type: 2}
+  resourceAmount: 0
+  resources:
+  - {fileID: 11400000, guid: 3be07c4ca4026bd4a929ad3eca3c4ce9, type: 2}
