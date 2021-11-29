@@ -739,9 +739,9 @@ MonoBehaviour:
   moveFromCenter: 1
   targetPosition: {x: 0, y: 0}
   hoverSound: {fileID: 8300000, guid: 400f55094fbe3ac47a9705bb1a0065ca, type: 3}
-  clickDownSound: {fileID: 8300000, guid: 9d7360c39810dac4fa4e7ba3043c3bc9, type: 3}
-  clickUpSound: {fileID: 8300000, guid: c8dfc08afe7bae34da454d9bdaa519e9, type: 3}
-  fullClickSound: {fileID: 8300000, guid: b2e297c1931dc4d47b6b68d1d2b9fa9e, type: 3}
+  clickDownSound: {fileID: 8300000, guid: 58c9d44ad58792b4ab1af15b028688d6, type: 3}
+  clickUpSound: {fileID: 0}
+  fullClickSound: {fileID: 8300000, guid: 58c9d44ad58792b4ab1af15b028688d6, type: 3}
   OnSuccesfulClick:
     m_PersistentCalls:
       m_Calls:
@@ -2220,9 +2220,9 @@ MonoBehaviour:
   moveFromCenter: 1
   targetPosition: {x: 0, y: 0}
   hoverSound: {fileID: 8300000, guid: 400f55094fbe3ac47a9705bb1a0065ca, type: 3}
-  clickDownSound: {fileID: 8300000, guid: 9d7360c39810dac4fa4e7ba3043c3bc9, type: 3}
-  clickUpSound: {fileID: 8300000, guid: c8dfc08afe7bae34da454d9bdaa519e9, type: 3}
-  fullClickSound: {fileID: 8300000, guid: b2e297c1931dc4d47b6b68d1d2b9fa9e, type: 3}
+  clickDownSound: {fileID: 8300000, guid: 3d0213d4d5631114296a11ab460d74d4, type: 3}
+  clickUpSound: {fileID: 0}
+  fullClickSound: {fileID: 8300000, guid: 3d0213d4d5631114296a11ab460d74d4, type: 3}
   OnSuccesfulClick:
     m_PersistentCalls:
       m_Calls:
@@ -2304,7 +2304,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1931286395096504497, guid: 829e4878293f7c3409f3bbec1f4f6c3a, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.243
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6886,9 +6886,9 @@ MonoBehaviour:
   moveFromCenter: 1
   targetPosition: {x: 0, y: 0}
   hoverSound: {fileID: 8300000, guid: 400f55094fbe3ac47a9705bb1a0065ca, type: 3}
-  clickDownSound: {fileID: 8300000, guid: 9d7360c39810dac4fa4e7ba3043c3bc9, type: 3}
-  clickUpSound: {fileID: 8300000, guid: c8dfc08afe7bae34da454d9bdaa519e9, type: 3}
-  fullClickSound: {fileID: 8300000, guid: b2e297c1931dc4d47b6b68d1d2b9fa9e, type: 3}
+  clickDownSound: {fileID: 8300000, guid: 58c9d44ad58792b4ab1af15b028688d6, type: 3}
+  clickUpSound: {fileID: 0}
+  fullClickSound: {fileID: 8300000, guid: 58c9d44ad58792b4ab1af15b028688d6, type: 3}
   OnSuccesfulClick:
     m_PersistentCalls:
       m_Calls:
@@ -6944,7 +6944,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1931286395096504497, guid: 829e4878293f7c3409f3bbec1f4f6c3a, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 400f55094fbe3ac47a9705bb1a0065ca, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

@@ -532,7 +532,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  totalScore: 0
+  totalMinerals: 0
+  mineralAmount: 0
   scoreText: {fileID: 1145253836}
   gameOverText: {fileID: 104161069}
   winText: {fileID: 667759953}
@@ -1994,9 +1995,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1931699594}
     - target: {fileID: 5079576611923206001, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: clickUpSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079576611923206001, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: clickDownSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d0213d4d5631114296a11ab460d74d4, type: 3}
+    - target: {fileID: 5079576611923206001, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: fullClickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 3d0213d4d5631114296a11ab460d74d4, type: 3}
+    - target: {fileID: 5079576611923206001, guid: e61999812890cef418375fc0b79e923b, type: 3}
       propertyPath: OnSuccesfulClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 235229145}
+    - target: {fileID: 5079576611923206002, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: m_Volume
+      value: 0.281
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079576613184670020, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: clickUpSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079576613184670020, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: clickDownSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 58c9d44ad58792b4ab1af15b028688d6, type: 3}
+    - target: {fileID: 5079576613184670020, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: fullClickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 58c9d44ad58792b4ab1af15b028688d6, type: 3}
     - target: {fileID: 5079576613184670020, guid: e61999812890cef418375fc0b79e923b, type: 3}
       propertyPath: OnSuccesfulClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
