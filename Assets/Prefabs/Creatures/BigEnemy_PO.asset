@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f715f092888c7984b8d5af2482456ace, type: 3}
   m_Name: BigEnemy_PO
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 0}
-  objectScaleMargin: 0.2
+  objectPrefab: {fileID: 3394111841084386816, guid: cda97f643a582bb4e9d0672f7bc91194, type: 3}
+  objectScaleMargin: 0
   objectRadius: 2
