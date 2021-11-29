@@ -18,6 +18,8 @@ public class EnemyShoot : MonoBehaviour
     private EnemyControls EC;
     private EntityHealth playerEntityHealth = null;
 
+    private Rigidbody rb;
+
     bool previousFrame;
 
     void Start()
@@ -26,6 +28,8 @@ public class EnemyShoot : MonoBehaviour
         if (forwardForward == null) forwardForward = transform;
 
         EC = this.gameObject.GetComponent<EnemyControls>();
+
+        rb = gameObject.GetComponent<Rigidbody>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null) playerEntityHealth = player.GetComponent<EntityHealth>();
@@ -41,6 +45,9 @@ public class EnemyShoot : MonoBehaviour
         if (EC.canShootPlayer)
         {
             if (Time.time < nextShootTime) return;
+
+            StartCoroutine(OnShoot());
+
             GameObject bulletClone = LeanPool.Spawn(bulletPrefab, PlanetManager.instance.GetPlanet().transform, true);
             bulletClone.transform.position = transform.position + forwardForward.forward * bulletOffsetMultiplier;
             bulletClone.transform.rotation = forwardForward.rotation;
@@ -56,11 +63,27 @@ public class EnemyShoot : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
+        StartCoroutine(OnHit(collision));
+    }
+
+    IEnumerator OnShoot()
+    {
+        rb.isKinematic = true;
+        yield return new WaitForSeconds(1);
+        rb.isKinematic = false;
+    }
+
+    IEnumerator OnHit(Collision collision)
+    {
         if (playerEntityHealth != null && collision.transform == playerEntityHealth.transform && Time.time > nextShootTime)
         {
             nextShootTime = Time.time + cooldown;
             playerEntityHealth.DealDamage(1);
             onMelee.Invoke();
+            rb.isKinematic = true;
+            yield return new WaitForSeconds(1);
+            rb.isKinematic = false;
+
         }
     }
 }

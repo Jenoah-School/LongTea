@@ -49,6 +49,7 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) || (shootingJoystick != null && canShoot))
         {
             if (Time.time < nextShootTime) return;
+
             GameObject bulletClone = LeanPool.Spawn(bulletPrefab, PlanetManager.instance.GetPlanet().transform, true);
             bulletClone.transform.position = transform.position + forwardForward.forward * bulletOffsetMultiplier;
             bulletClone.transform.rotation = forwardForward.rotation;

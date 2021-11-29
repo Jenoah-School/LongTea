@@ -6,7 +6,7 @@ public class EnemyControls : MonoBehaviour
 {
     enum enemyType { shooter, brawler }
 
-    enemyType type;
+    [SerializeField] enemyType type;
 
     public bool canShootPlayer;
 
@@ -15,9 +15,9 @@ public class EnemyControls : MonoBehaviour
     [SerializeField] private float detectionDistance = 15;
     [SerializeField] private LayerMask detectionIgnoreLayers;
     [SerializeField] private SimpleAnimation simpleAnimation;
+    [SerializeField] private float shootingDistance = 0;
 
-    private Rigidbody rb;
-    private float stoppingDistance = 0;
+    private Rigidbody rb;    
     private float roamingDelay = 0;
     private float rotateSpeed = 90;
     private float rotationAngle;
@@ -36,7 +36,6 @@ public class EnemyControls : MonoBehaviour
         rotationAngle = Random.Range(0, 360);
 
         StartCoroutine(RoamingMode());
-        SetEnemyType();
     }
 
     void FixedUpdate()
@@ -63,21 +62,6 @@ public class EnemyControls : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + lookDirection, Color.yellow);
         Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red);
         Debug.DrawLine(transform.position, player.transform.position, Color.white);
-    }
-
-    void SetEnemyType()
-    {
-        int randomInt = Random.Range(0, 2);
-        type = randomInt == 1 ? enemyType.brawler : enemyType.shooter;
-
-        if(type == enemyType.shooter)
-        {
-            stoppingDistance = 10;
-        }
-        else
-        {
-            moveSpeed *= 1.25f;
-        }
     }
 
     IEnumerator RoamingMode()
@@ -144,7 +128,7 @@ public class EnemyControls : MonoBehaviour
                 {
                     Vector3 differenceVector = player.transform.position - transform.position;
                     lookDirection = Vector3.ProjectOnPlane(differenceVector.normalized, transform.up);
-                    if(type == enemyType.shooter && Vector3.Distance(transform.position, player.transform.position) < stoppingDistance)
+                    if(type == enemyType.shooter && Vector3.Distance(transform.position, player.transform.position) < shootingDistance)
                     {
                         canShootPlayer = true;
                     }
