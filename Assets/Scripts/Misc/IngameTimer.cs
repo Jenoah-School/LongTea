@@ -21,6 +21,7 @@ public class IngameTimer : MonoBehaviour
         startTime = remainingTime;
         if (startCountdownOnStart) hasStarted = true;
         if (timeText != null) InvokeRepeating("UpdateLabel", 0.25f, 1f);
+        InvokeRepeating("AddSecondsScore", 1f, 1f);
         UpdateLabel();
     }
 
@@ -44,20 +45,15 @@ public class IngameTimer : MonoBehaviour
         hasStarted = true;
     }
 
+    public void AddSecondsScore()
+    {
+        ScoreManager.instance.IncreaseScore(scorePerSecond);
+    }
+
     public void UpdateLabel()
     {
         int minutesLeft = Mathf.FloorToInt(remainingTime / 60);
         int secondsLeft = Mathf.FloorToInt(remainingTime % 60);
         timeText.text = minutesLeft.ToString("00") + ":" + secondsLeft.ToString("00");
-    }
-
-    public int GetRewardScore()
-    {
-        return Mathf.RoundToInt(((int)startTime - (int)remainingTime) * scorePerSecond);
-    }
-
-    public void AddRewardScore()
-    {
-        ScoreManager.instance.IncreaseScore(GetRewardScore());
     }
 }

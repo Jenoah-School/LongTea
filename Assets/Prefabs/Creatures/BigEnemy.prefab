@@ -196,7 +196,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.8
+      value: 0.6
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aef13c03de33284ca500f80372cf583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAmount: 1
+  scoreAmount: 110
 --- !u!1 &4016888894299522363
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,28 +805,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushroom_Enemy_Large_01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb78dd548eff9904c934997e12662ff4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb78dd548eff9904c934997e12662ff4, type: 3}
---- !u!1 &2026192351355190192 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bb78dd548eff9904c934997e12662ff4, type: 3}
-  m_PrefabInstance: {fileID: 1215711197847783137}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1681438712993669386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb78dd548eff9904c934997e12662ff4, type: 3}
   m_PrefabInstance: {fileID: 1215711197847783137}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2209577682244128783
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026192351355190192}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

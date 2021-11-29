@@ -301,6 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredTimeToCollect: 2
   timerImage: {fileID: 5835398471789160698}
+  increaseScore: 0
   onCollect:
     m_PersistentCalls:
       m_Calls:
@@ -346,6 +347,7 @@ MonoBehaviour:
   onExitRadius:
     m_PersistentCalls:
       m_Calls: []
+  entityScore: {fileID: 0}
 --- !u!135 &5835398472758371428
 SphereCollider:
   m_ObjectHideFlags: 0

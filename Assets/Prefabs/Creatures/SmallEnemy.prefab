@@ -196,7 +196,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.8
+      value: 0.6
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
         m_MethodName: PlaySound
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 8fcff22e14bb11443b3b00f4ae986ee5, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: ab92706de3aec6b4faaae20d828f527c, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aef13c03de33284ca500f80372cf583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAmount: 1
+  scoreAmount: 50
 --- !u!1 &4016888894299522363
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,28 +805,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushroom_Enemy_Small_01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d9f60d28defee44ab0f89552bfbbb78, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d9f60d28defee44ab0f89552bfbbb78, type: 3}
---- !u!1 &252105017416108377 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d9f60d28defee44ab0f89552bfbbb78, type: 3}
-  m_PrefabInstance: {fileID: 1134557446856209416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &591229950357279715 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5d9f60d28defee44ab0f89552bfbbb78, type: 3}
   m_PrefabInstance: {fileID: 1134557446856209416}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2887283422482517000
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252105017416108377}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

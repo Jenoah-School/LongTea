@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 226812464055376887}
   - component: {fileID: 6110355446616280041}
   - component: {fileID: 9144796130174403696}
+  - component: {fileID: -5806300703823202247}
   m_Layer: 0
   m_Name: Mushroom_Mineral_Small_01
   m_TagString: Resource
@@ -190,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredTimeToCollect: 2
   timerImage: {fileID: 3286391819771799304}
+  increaseScore: 1
   onCollect:
     m_PersistentCalls:
       m_Calls:
@@ -229,12 +231,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: -4995625765183257307, guid: 0f093be86b38acd4ab93466d0387e0af, type: 3}
+        m_TargetAssemblyTypeName: EntityScore, Assembly-CSharp
+        m_MethodName: AddToMineral
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onEnterRadius:
     m_PersistentCalls:
       m_Calls: []
   onExitRadius:
     m_PersistentCalls:
       m_Calls: []
+  entityScore: {fileID: -4995625765183257307, guid: 0f093be86b38acd4ab93466d0387e0af, type: 3}
 --- !u!114 &6110355446616280041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +378,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-5806300703823202247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629818520787631481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aef13c03de33284ca500f80372cf583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreAmount: 250
+  isMineral: 1
 --- !u!1 &3636591528584722933
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class CollectResource : MonoBehaviour
 {
     [SerializeField] private float requiredTimeToCollect = 2f;
     [SerializeField] private Image timerImage = null;
+    [SerializeField] private bool increaseScore = true;
 
     //Events
     [SerializeField] private UnityEvent onCollect = null;
@@ -37,13 +38,16 @@ public class CollectResource : MonoBehaviour
             if(inRangeTimer >= requiredTimeToCollect)
             {
                 hasBeenCollected = true;
-                if (entityScore != null)
+                if (increaseScore)
                 {
-                    entityScore.AddToScore();
-                }
-                else
-                {
-                    ScoreManager.instance.IncreaseScore(1);
+                    if (entityScore != null)
+                    {
+                        entityScore.AddToScore();
+                    }
+                    else
+                    {
+                        ScoreManager.instance.IncreaseScore(1);
+                    }
                 }
                 onCollect.Invoke();
             }
