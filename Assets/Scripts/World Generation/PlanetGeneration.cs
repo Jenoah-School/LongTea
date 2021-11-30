@@ -316,7 +316,9 @@ public class PlanetGeneration : MonoBehaviour
     private void UpdateResourceCount()
     {
         planets[0].SetResourceAmount(placedResources.Count);
-        ScoreManager.instance.IncreaseTotalMinerals(placedResources.Count);
+        ScoreManager.instance.SetTotalMinerals(placedResources.Count);
+        ScoreManager.instance.SetMineralCount(0);
+        //ScoreManager.instance.IncreaseTotalMinerals(placedResources.Count);
         StartCoroutine(SpawnObjects(currentBiome.vegetation, currentBiome.vegetationAmount, null, EndGeneration, .5f));
     }
 

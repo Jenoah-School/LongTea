@@ -46,6 +46,13 @@ public class ScoreManager : MonoBehaviour
         CheckScore();
     }
 
+    public void SetMineralCount(int newMineralScore)
+    {
+        mineralAmount = newMineralScore;
+        UpdateScoreLabelAnimated();
+        CheckScore();
+    }
+
     public void SetTotalMinerals(int newTotalScore)
     {
         totalMinerals = newTotalScore;

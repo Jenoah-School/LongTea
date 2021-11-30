@@ -45,6 +45,7 @@ public class QuickAnimations : MonoBehaviour
                 for (int j = 0; j < meshRenderers[i].materials.Length; j++)
                 {
                     materials.Add(meshRenderers[i].materials[j]);
+                    defaultMaterialColor.Add(meshRenderers[i].materials[j].color);
                 }
             }
         }
@@ -85,6 +86,19 @@ public class QuickAnimations : MonoBehaviour
         }
     }
 
+    public void FlashMaterial(float speed)
+    {
+        StopCoroutine(FlashMaterialEnum(speed));
+        StartCoroutine(FlashMaterialEnum(speed));
+    }
+
+    IEnumerator FlashMaterialEnum(float speed)
+    {
+        SetMaterialColor(speed / 2f);
+        yield return new WaitForSeconds(speed / 2f);
+        ResetMaterialColor(speed / 2f);
+    }
+
     public void SetMaterialColor(float speed)
     {
         foreach (Material material in materials)
@@ -122,7 +136,7 @@ public class QuickAnimations : MonoBehaviour
         transform.DOScale(growTarget, speed);
         if (disableCollisionOnGrow)
         {
-            foreach(Collider collider in colliders)
+            foreach (Collider collider in colliders)
             {
                 collider.enabled = false;
             }
@@ -171,7 +185,7 @@ public class QuickAnimations : MonoBehaviour
 
     public void FadeOut(float speed)
     {
-        foreach(Material material in materials)
+        foreach (Material material in materials)
         {
             material.DOFade(0f, speed);
         }
@@ -180,7 +194,7 @@ public class QuickAnimations : MonoBehaviour
         {
             if (LeanPool.Links.ContainsKey(gameObject))
             {
-            LeanPool.Despawn(rootObject, speed + 0.1f);
+                LeanPool.Despawn(rootObject, speed + 0.1f);
             }
             else
             {

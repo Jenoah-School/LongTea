@@ -702,7 +702,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 192, y: -192}
+  m_AnchoredPosition: {x: 192, y: -448}
   m_SizeDelta: {x: 256, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &474038083
@@ -1721,8 +1721,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 112, y: -384}
-  m_SizeDelta: {x: 192, y: 192}
+  m_AnchoredPosition: {x: 180, y: -288}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1157407901
 CanvasRenderer:
@@ -1752,7 +1752,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 609f3301a10fa474cae5206548ee10be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 048267758b6ce334c8dcec8304420089, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1964,7 +1964,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RotateOnAxis, Assembly-CSharp
-        m_MethodName: RotateTowardsOnAxis
+        m_MethodName: RotateToCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4231,8 +4231,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7923429725664691860}
   - {fileID: 5554738996907700673}
+  - {fileID: 7923429725664691860}
   m_Father: {fileID: 1543338511855031215}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4337,7 +4337,7 @@ RectTransform:
   - {fileID: 1504398578929137600}
   - {fileID: 7527251746325276722}
   m_Father: {fileID: 8201284017136662182}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4891,7 +4891,7 @@ RectTransform:
   - {fileID: 8114439024301926509}
   - {fileID: 7523621672604372879}
   m_Father: {fileID: 8201284017136662182}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5858,7 +5858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8164281, g: 0.58186185, b: 0.9150943, a: 1}
+  m_Color: {r: 0.7137255, g: 0.8156863, b: 0.8862745, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5988,7 +5988,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8067070454681424008}
   - component: {fileID: 8511124381184229415}
-  - component: {fileID: 1426036655519178665}
   m_Layer: 5
   m_Name: ViewBobbing
   m_TagString: Untagged
@@ -6064,7 +6063,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1426036655519178665}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GeneralManager, Assembly-CSharp
         m_MethodName: ToggleCameraSmoothing
         m_Mode: 1
@@ -6077,20 +6076,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
---- !u!114 &1426036655519178665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213568964468217812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01cbdd39ac532b24f8a947fbf59de3b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraToggle: {fileID: 8511124381184229415}
-  cinemachineCamera: {fileID: 0}
 --- !u!1 &1307925383014306202
 GameObject:
   m_ObjectHideFlags: 0
@@ -7496,21 +7481,9 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2004778306}
         m_TargetAssemblyTypeName: GraphicsSettings, Assembly-CSharp
         m_MethodName: UpdatePFXWithToggle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HapticsManager, Assembly-CSharp
-        m_MethodName: VeryQuickVibrate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8003,7 +7976,7 @@ RectTransform:
   - {fileID: 279635735241172472}
   - {fileID: 6779419481215585127}
   m_Father: {fileID: 1693123881664220594}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9012,21 +8985,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2004778306}
         m_TargetAssemblyTypeName: GraphicsSettings, Assembly-CSharp
         m_MethodName: UpdateQualityWithDropdown
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HapticsManager, Assembly-CSharp
-        m_MethodName: VeryQuickVibrate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10810,8 +10771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ppVolume: {fileID: 0}
-  qualityDropdown: {fileID: 0}
-  ppfxToggle: {fileID: 0}
+  qualityDropdown: {fileID: 3925869037285384458}
+  ppfxToggle: {fileID: 3815195199722398285}
 --- !u!114 &2004778311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11047,7 +11008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7137255, g: 0.8156863, b: 0.8862745, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11094,8 +11055,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3288600799245179761}
   - {fileID: 4130013153588782589}
+  - {fileID: 3288600799245179761}
   m_Father: {fileID: 6260135382364870853}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11461,7 +11422,7 @@ RectTransform:
   - {fileID: 1543860395622460493}
   - {fileID: 7392991106173240260}
   m_Father: {fileID: 1693123881664220594}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12096,7 +12057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 9f3241ebc33be134892cd3e867658c19, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7529412}
+  m_Color: {r: 0.7137255, g: 0.8156863, b: 0.8862745, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13725,14 +13686,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec536a7718376554185e4a856d5ae230, type: 3}
---- !u!224 &8332271529883523363 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3881087803549984436, guid: ec536a7718376554185e4a856d5ae230, type: 3}
-  m_PrefabInstance: {fileID: 5079576611846389655}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8332271529883523362 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3881087803549984437, guid: ec536a7718376554185e4a856d5ae230, type: 3}
+  m_PrefabInstance: {fileID: 5079576611846389655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8332271529883523363 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3881087803549984436, guid: ec536a7718376554185e4a856d5ae230, type: 3}
   m_PrefabInstance: {fileID: 5079576611846389655}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5079576612212824770
