@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] float speed = 10f;
+    [SerializeField] float rotationSpeed = 5f;
     [SerializeField] private Joystick movementJoystick;
     [SerializeField] private Joystick rotationJoystick;
     [SerializeField] private Transform model;
@@ -38,7 +39,7 @@ public class PlayerControls : MonoBehaviour
 
         if (rotationJoystick == null || (rotationJoystick != null && rotationJoystick.Direction.SqrMagnitude() <= 0))
         {
-            transform.Rotate(0, Input.GetAxisRaw("HorizontalRotate"), 0);
+            model.Rotate(0, Input.GetAxisRaw("HorizontalRotate") * rotationSpeed, 0);
         }
         else
         {
