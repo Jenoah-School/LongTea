@@ -56,7 +56,9 @@ public class PlayerShoot : MonoBehaviour
             GameObject bulletClone = LeanPool.Spawn(bulletPrefab, PlanetManager.instance.GetPlanet().transform, true);
             bulletClone.transform.rotation = forwardForward.rotation;
             bulletClone.transform.position = transform.position + bulletClone.transform.forward + rb.velocity * bulletOffsetMultiplier;
-            bulletClone.GetComponent<BulletBehaviour>().trailRenderer.Clear();
+            BulletBehaviour bulletBehaviour = bulletClone.GetComponent<BulletBehaviour>();
+            bulletBehaviour.SetTargetDirection();
+            bulletBehaviour.trailRenderer.Clear();
 
             nextShootTime = Time.time + cooldown;
 

@@ -38,8 +38,8 @@ public class EntityHealth : MonoBehaviour
 
     public virtual void DealDamage(float damageAmount)
     {
-        //Skip is entity is already dead
-        if (isDead || Time.time < nextHitTime) return;
+        //Skip if entity is already dead
+        if (isDead || (hasPartialImmunity && Time.time < nextHitTime)) return;
         nextHitTime = Time.time + cooldownTime;
 
         health -= damageAmount;

@@ -15,6 +15,7 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private AudioClip hitSound = null;
 
     private PlanetInfo planetInfo;
+    private Vector3 targetDirection = Vector3.zero;
 
     private void Start()
     {
@@ -27,6 +28,11 @@ public class BulletBehaviour : MonoBehaviour
         trailRenderer.Clear();
     }
 
+    public void SetTargetDirection()
+    {
+        targetDirection = transform.right;
+    }
+
     void Update()
     {
         Move();
@@ -34,7 +40,7 @@ public class BulletBehaviour : MonoBehaviour
 
     void Move()
     {
-        transform.RotateAround(PlanetManager.instance.GetPlanet().transform.position, transform.right, (moveSpeed * Time.deltaTime) / planetSize);
+        transform.RotateAround(PlanetManager.instance.GetPlanet().transform.position, targetDirection, (moveSpeed * Time.deltaTime) / planetSize);
     }
 
     private void OnCollisionEnter(Collision collision)

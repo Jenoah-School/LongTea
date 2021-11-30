@@ -374,6 +374,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  hasPartialImmunity: 0
+  cooldownTime: 1
 --- !u!114 &8062177733107201165
 MonoBehaviour:
   m_ObjectHideFlags: 0
