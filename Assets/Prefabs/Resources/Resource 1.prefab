@@ -14,13 +14,14 @@ GameObject:
   - component: {fileID: 2668979045287208069}
   - component: {fileID: 8278606849893676187}
   - component: {fileID: 6397087670941612802}
+  - component: {fileID: 991751303}
   m_Layer: 0
   m_Name: Resource 1
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &166964088187044360
 Transform:
   m_ObjectHideFlags: 0
@@ -77,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredTimeToCollect: 2
   timerImage: {fileID: 843379313093351546}
+  increaseScore: 1
   onCollect:
     m_PersistentCalls:
       m_Calls:
@@ -116,12 +118,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 991751303}
+        m_TargetAssemblyTypeName: EntityScore, Assembly-CSharp
+        m_MethodName: AddToMineral
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onEnterRadius:
     m_PersistentCalls:
       m_Calls: []
   onExitRadius:
     m_PersistentCalls:
       m_Calls: []
+  entityScore: {fileID: 0}
 --- !u!114 &8278606849893676187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +265,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &991751303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166964088187044363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aef13c03de33284ca500f80372cf583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreAmount: 250
 --- !u!1 &1465946197395261063
 GameObject:
   m_ObjectHideFlags: 0
