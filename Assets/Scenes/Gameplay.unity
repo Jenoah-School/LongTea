@@ -1570,6 +1570,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 847796958}
     - target: {fileID: 1608567081, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 400f55094fbe3ac47a9705bb1a0065ca, type: 3}
+    - target: {fileID: 1608567081, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: clickUpSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1608567081, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: clickDownSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 58c9d44ad58792b4ab1af15b028688d6, type: 3}
+    - target: {fileID: 1608567081, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: fullClickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 58c9d44ad58792b4ab1af15b028688d6, type: 3}
+    - target: {fileID: 1608567081, guid: e61999812890cef418375fc0b79e923b, type: 3}
       propertyPath: OnSuccesfulClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 235229145}
