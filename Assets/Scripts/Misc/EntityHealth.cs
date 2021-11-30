@@ -8,14 +8,20 @@ public class EntityHealth : MonoBehaviour
     [SerializeField] public float health = 3f;
     [SerializeField] private UnityEvent OnHit;
     [SerializeField] private UnityEvent OnDeath;
+    [SerializeField] private bool hasPartialImmunity = false;
+    [SerializeField] private float cooldownTime = 1f;
 
     protected bool isDead = false;
     protected float startHealth = 3f;
 
+    private float nextHitTime = 0f;
+
     private void Start()
     {
         startHealth = health;
+        nextHitTime = Time.time;
     }
+
     public void SetHealth(float newHealth)
     {
         health = newHealth;
@@ -33,7 +39,8 @@ public class EntityHealth : MonoBehaviour
     public virtual void DealDamage(float damageAmount)
     {
         //Skip is entity is already dead
-        if (isDead) return;
+        if (isDead || Time.time < nextHitTime) return;
+        nextHitTime = Time.time + cooldownTime;
 
         health -= damageAmount;
         if (health <= 0)
