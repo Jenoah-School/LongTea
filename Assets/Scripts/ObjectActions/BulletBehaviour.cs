@@ -9,7 +9,7 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float planetSize = 5f;
     
-    [SerializeField] private TrailRenderer trailRenderer = null;
+    [SerializeField] public TrailRenderer trailRenderer = null;
 
     [Header("Audio")]
     [SerializeField] private AudioClip hitSound = null;

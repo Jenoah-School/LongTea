@@ -5066,7 +5066,7 @@ MonoBehaviour:
   onExitRadius:
     m_PersistentCalls:
       m_Calls: []
-  entityScore: {fileID: -4995625765183257307, guid: 0f093be86b38acd4ab93466d0387e0af, type: 3}
+  entityScore: {fileID: -5806300703823202247}
 --- !u!114 &6110355446616280041
 MonoBehaviour:
   m_ObjectHideFlags: 0

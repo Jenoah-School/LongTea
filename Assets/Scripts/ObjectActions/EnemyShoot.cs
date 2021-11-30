@@ -52,7 +52,18 @@ public class EnemyShoot : MonoBehaviour
 
             StartCoroutine(OnShoot());
 
-            nextShootTime = Time.time + cooldown;          
+            GameObject bulletClone = LeanPool.Spawn(bulletPrefab, PlanetManager.instance.GetPlanet().transform, true);
+            bulletClone.transform.position = transform.position + forwardForward.forward * bulletOffsetMultiplier;
+            bulletClone.transform.rotation = forwardForward.rotation;
+            bulletClone.GetComponent<BulletBehaviour>().trailRenderer.Clear();
+
+            nextShootTime = Time.time + cooldown;
+
+            if (shotSound != null)
+            {
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.PlayOneShot(shotSound);
+            }
         }       
     }
     private void OnCollisionStay(Collision collision)
