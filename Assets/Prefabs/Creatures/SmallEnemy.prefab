@@ -87,6 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   canShootPlayer: 0
+  canMove: 0
   moveSpeed: 7.5
   fieldOfView: 150
   detectionDistance: 20

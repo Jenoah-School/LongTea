@@ -9,6 +9,7 @@ public class EnemyControls : MonoBehaviour
     [SerializeField] enemyType type;
 
     public bool canShootPlayer;
+    public bool canMove = true;
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float fieldOfView = 90;
@@ -40,6 +41,7 @@ public class EnemyControls : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!canMove) return;
         if (Physics.Raycast(transform.position, transform.forward, 2, ~detectionIgnoreLayers) && !hasDetectedPlayer)
         {
             currentDirection = Vector3.zero;

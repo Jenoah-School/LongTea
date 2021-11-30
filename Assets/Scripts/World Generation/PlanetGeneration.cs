@@ -49,7 +49,6 @@ public class PlanetGeneration : MonoBehaviour
     public void DisableCurrentPlanet()
     {
         currentPlanet.SetActive(false);
-        // REMOVE THE BIOME DIFFERENCE THING
 
         if (planetBiomes.Count <= 0) return;
         currentBiome = planetBiomes[Random.Range(0, planetBiomes.Count)];
@@ -80,6 +79,9 @@ public class PlanetGeneration : MonoBehaviour
         currentPlanet.AddComponent<SphereCollider>();
         planets.Add(planetInfo);
         planetInfo.SetPlanetSize(planetSize);
+
+        enemies.Clear();
+        placedResources.Clear();
 
         StartCoroutine(SpawnObjects(currentBiome.resources, currentBiome.resourceAmount, placedResources, PlaceMustSpawns));
 
@@ -303,9 +305,17 @@ public class PlanetGeneration : MonoBehaviour
         mesh.vertices = vertices;
     }
 
+    public void UnfreezeEnemies()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].GetComponent<EnemyControls>().canMove = true;
+        }
+    }
+
     private void PlaceMustSpawns()
     {
-        StartCoroutine(SpawnObjects(currentBiome.mustSpawnedItems, currentBiome.mustSpawnedItemAmount, enemies, PlaceEnemies));
+        StartCoroutine(SpawnObjects(currentBiome.mustSpawnedItems, currentBiome.mustSpawnedItemAmount, null, PlaceEnemies));
     }
 
     private void PlaceEnemies()
