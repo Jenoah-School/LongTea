@@ -14,7 +14,7 @@ public class EnemyControls : MonoBehaviour
     [SerializeField] private float fieldOfView = 90;
     [SerializeField] private float detectionDistance = 15;
     [SerializeField] private LayerMask detectionIgnoreLayers;
-    [SerializeField] private SimpleAnimation simpleAnimation;
+    [SerializeField] public SimpleAnimation simpleAnimation;
     [SerializeField] private float shootingDistance = 0;
 
     private Rigidbody rb;    
@@ -190,6 +190,6 @@ public class EnemyControls : MonoBehaviour
 
     bool ApproximateToVector(Vector3 v1, Vector3 v2)
     {
-        return Vector3.SqrMagnitude(v1 - v2) < 0.0001f;
+        return Vector3.SqrMagnitude(v1 - v2) < 0.001f;
     }
 }

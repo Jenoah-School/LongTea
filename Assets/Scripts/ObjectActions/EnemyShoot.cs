@@ -19,8 +19,11 @@ public class EnemyShoot : MonoBehaviour
     private EntityHealth playerEntityHealth = null;
 
     private Rigidbody rb;
+    private SimpleAnimation SA;
 
     bool previousFrame;
+
+    float attackPauseInterval = 1;
 
     void Start()
     {
@@ -30,6 +33,7 @@ public class EnemyShoot : MonoBehaviour
         EC = this.gameObject.GetComponent<EnemyControls>();
 
         rb = gameObject.GetComponent<Rigidbody>();
+        SA = gameObject.GetComponent<EnemyControls>().simpleAnimation;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null) playerEntityHealth = player.GetComponent<EntityHealth>();
@@ -48,17 +52,7 @@ public class EnemyShoot : MonoBehaviour
 
             StartCoroutine(OnShoot());
 
-            GameObject bulletClone = LeanPool.Spawn(bulletPrefab, PlanetManager.instance.GetPlanet().transform, true);
-            bulletClone.transform.position = transform.position + forwardForward.forward * bulletOffsetMultiplier;
-            bulletClone.transform.rotation = forwardForward.rotation;
-
-            nextShootTime = Time.time + cooldown;
-
-            if (shotSound != null)
-            {
-                audioSource.pitch = Random.Range(0.8f, 1.2f);
-                audioSource.PlayOneShot(shotSound);
-            }
+            nextShootTime = Time.time + cooldown;          
         }       
     }
     private void OnCollisionStay(Collision collision)
@@ -68,9 +62,21 @@ public class EnemyShoot : MonoBehaviour
 
     IEnumerator OnShoot()
     {
+        if(SA != null) SA.StopMovingImmediate();
         rb.isKinematic = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(attackPauseInterval);
+        GameObject bulletClone = LeanPool.Spawn(bulletPrefab, PlanetManager.instance.GetPlanet().transform, true);
+        bulletClone.transform.position = transform.position + forwardForward.forward * bulletOffsetMultiplier;
+        bulletClone.transform.rotation = forwardForward.rotation;
+
+        if (shotSound != null)
+        {
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.PlayOneShot(shotSound);
+        }
+
         rb.isKinematic = false;
+        if (SA != null) SA.StartMoving();
     }
 
     IEnumerator OnHit(Collision collision)
@@ -81,7 +87,7 @@ public class EnemyShoot : MonoBehaviour
             playerEntityHealth.DealDamage(1);
             onMelee.Invoke();
             rb.isKinematic = true;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(attackPauseInterval);
             rb.isKinematic = false;
 
         }

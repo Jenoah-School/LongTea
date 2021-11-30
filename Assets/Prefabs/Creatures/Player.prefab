@@ -5317,7 +5317,7 @@ MonoBehaviour:
   forwardForward: {fileID: 8033981345301670717}
   shootingJoystick: {fileID: 0}
   cooldown: 0.5
-  bulletOffsetMultiplier: 1.6
+  bulletOffsetMultiplier: 1
   onShoot:
     m_PersistentCalls:
       m_Calls:

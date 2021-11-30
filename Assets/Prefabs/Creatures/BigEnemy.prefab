@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3394111841084386846}
-  - component: {fileID: 3394111841084386819}
   - component: {fileID: 3394111841084386818}
   - component: {fileID: 3394111841084386817}
   - component: {fileID: 3394111841084386847}
@@ -20,6 +19,7 @@ GameObject:
   - component: {fileID: 4923835640065287919}
   - component: {fileID: 1736117499943076803}
   - component: {fileID: 2635209887581655939}
+  - component: {fileID: 6536496550310045866}
   m_Layer: 7
   m_Name: BigEnemy
   m_TagString: Enemy
@@ -42,19 +42,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3394111841084386819
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3394111841084386816}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3394111841084386818
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -420,6 +407,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreAmount: 110
+--- !u!136 &6536496550310045866
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394111841084386816}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.8458714
+  m_Height: 2.4359074
+  m_Direction: 1
+  m_Center: {x: -0.008695543, y: 0.19573593, z: 0}
 --- !u!1 &4016888894299522363
 GameObject:
   m_ObjectHideFlags: 0
