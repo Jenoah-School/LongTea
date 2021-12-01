@@ -109,4 +109,14 @@ public class ScoreManager : MonoBehaviour
         mineralTextGameOver.text = $"{mineralAmount} / {totalMinerals}";
         mineralTextWin.text = $"{mineralAmount} / {totalMinerals}";
     }
+
+    public void SafeScore()
+    {
+        int highScore = PlayerPrefs.GetInt("highscore", 0);
+        if(score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("highscore", highScore);
+        }
+    }
 }

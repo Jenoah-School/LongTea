@@ -11,6 +11,7 @@ public class PlanetGeneration : MonoBehaviour
     [SerializeField] private bool flatShaded = true;
     [SerializeField] private string planetLayer = "Planet";
     [SerializeField] private Material vertexColorMaterial;
+    [SerializeField] private float spawningSafezone = 4f;
 
     [Header("Finish")]
     [SerializeField] private UnityEvent onPlanetFinishedGeneration;
@@ -21,20 +22,22 @@ public class PlanetGeneration : MonoBehaviour
     [Space(20)]
     [SerializeField] private List<PlanetBiome> planetBiomes = new List<PlanetBiome>();
 
-    private int spawnedResources = 0;
-    
+    [Header("Debug")]
+    [SerializeField] private List<PlanetInfo> planets = new List<PlanetInfo>();
+    [SerializeField] private List<GameObject> placedResources = new List<GameObject>();
+    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
+
     private Mesh mesh;
     private Vector3[] vertices;
     private Vector3[] normals;
     private Color32[] cubeUV;
     private Color32[] colors;
 
-    [Header("Debug")]
-    [SerializeField] private List<PlanetInfo> planets = new List<PlanetInfo>();
-    [SerializeField] private List<GameObject> placedResources = new List<GameObject>();
-    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
-
     private GameObject currentPlanet = null;
+    private GameObject spawnPrevention = null;
+
+    private int spawnedResources = 0;
+    private Transform player = null;
     private PlanetBiome currentBiome = null;
     private Noise noise;
 
@@ -43,6 +46,10 @@ public class PlanetGeneration : MonoBehaviour
         noise = new Noise();
         if (planetBiomes.Count <= 0) return;
         currentBiome = planetBiomes[Random.Range(0, planetBiomes.Count)];
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        spawnPrevention = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        spawnPrevention.name = "Spawning safezone";
+        spawnPrevention.transform.localScale = Vector3.one * spawningSafezone;
         Generate();
     }
 
@@ -52,6 +59,7 @@ public class PlanetGeneration : MonoBehaviour
 
         if (planetBiomes.Count <= 0) return;
         currentBiome = planetBiomes[Random.Range(0, planetBiomes.Count)];
+        
 
         placedResources.Clear();
     }
@@ -81,6 +89,10 @@ public class PlanetGeneration : MonoBehaviour
 
         enemies.Clear();
         placedResources.Clear();
+
+        spawnPrevention.SetActive(true);
+        Vector3 playerDirection = (player.position - transform.position).normalized;
+        spawnPrevention.transform.position = transform.position + playerDirection * planetSize;
 
         StartCoroutine(SpawnObjects(currentBiome.resources, currentBiome.resourceAmount, placedResources, PlaceMustSpawns));
 
@@ -327,13 +339,13 @@ public class PlanetGeneration : MonoBehaviour
         planets[0].SetResourceAmount(placedResources.Count);
         ScoreManager.instance.SetTotalMinerals(placedResources.Count);
         ScoreManager.instance.SetMineralCount(0);
-        //ScoreManager.instance.IncreaseTotalMinerals(placedResources.Count);
         StartCoroutine(SpawnObjects(currentBiome.vegetation, currentBiome.vegetationAmount, null, EndGeneration, .5f));
     }
 
     private void EndGeneration()
     {
         onPlanetFinishedGeneration.Invoke();
+        spawnPrevention.SetActive(false);
     }
 
     private void PlaceColliderlessObjects()

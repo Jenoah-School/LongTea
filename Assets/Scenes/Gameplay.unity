@@ -1094,6 +1094,7 @@ MonoBehaviour:
   flatShaded: 1
   planetLayer: Planet
   vertexColorMaterial: {fileID: 2100000, guid: c3fd4f2a4ebcc5649a74488c93cf94d5, type: 2}
+  spawningSafezone: 10
   onPlanetFinishedGeneration:
     m_PersistentCalls:
       m_Calls:
@@ -2306,6 +2307,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
       value: 4
       objectReference: {fileID: 0}
@@ -2321,6 +2326,10 @@ PrefabInstance:
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 847796958}
+    - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[16].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2374,6 +2383,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 235229142}
     - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[16].m_Target
+      value: 
+      objectReference: {fileID: 235229142}
+    - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -2382,15 +2395,35 @@ PrefabInstance:
       value: FlashMaterial
       objectReference: {fileID: 0}
     - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[16].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[16].m_MethodName
+      value: SafeScore
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
       value: QuickAnimations, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[16].m_TargetAssemblyTypeName
+      value: ScoreManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_FloatArgument
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[16].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033981346406143760, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[16].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8033981346406143761, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
