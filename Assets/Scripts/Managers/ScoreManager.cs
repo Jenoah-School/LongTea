@@ -10,8 +10,10 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance = null;
 
     [SerializeField] private int score = 0;
-    [SerializeField] private int totalMinerals = 0;
+    [SerializeField] private int totalVisualMinerals = 0;
     [SerializeField] private int mineralAmount = 0;
+    [SerializeField] private int totalMinerals = 0;
+    [SerializeField] private int totalCollectedMinerals = 0;
 
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -46,13 +48,15 @@ public class ScoreManager : MonoBehaviour
         UpdateMineralLabelAnimated();
     }
 
-    public void SetTotalMinerals(int newTotalScore)
+    public void SetVisualTotalMinerals(int newVisualTotalScore)
     {
-        totalMinerals = newTotalScore;
+        totalVisualMinerals = newVisualTotalScore;
+        totalMinerals += newVisualTotalScore;
         UpdateMineralLabel();
     }
-    public void IncreaseTotalMinerals(int incrementAmount)
+    public void IncreaseVisualTotalMinerals(int incrementAmount)
     {
+        totalVisualMinerals += incrementAmount;
         totalMinerals += incrementAmount;
         UpdateMineralLabel();
     }
@@ -63,9 +67,9 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreLabelAnimated();
     }
 
-    public int GetTotalMinerals()
+    public int GetVisualTotalMinerals()
     {
-        return totalMinerals;
+        return totalVisualMinerals;
     }
 
     public int GetScore()
@@ -76,12 +80,13 @@ public class ScoreManager : MonoBehaviour
     public void CollectMineral()
     {
         mineralAmount += 1;
+        totalCollectedMinerals += 1;
         UpdateMineralLabelAnimated();
     }
 
     public void UpdateMineralLabel()
     {
-        mineralText.text = $"{mineralAmount} / {totalMinerals}";
+        mineralText.text = $"{mineralAmount} / {totalVisualMinerals}";
     }
 
     public void UpdateScoreLabel()
@@ -98,7 +103,7 @@ public class ScoreManager : MonoBehaviour
 
     public void UpdateMineralLabelAnimated()
     {
-        mineralText.text = $"{mineralAmount} / {totalMinerals}";
+        mineralText.text = $"{mineralAmount} / {totalVisualMinerals}";
         mineralText.DOComplete();
         mineralText.rectTransform.DOPunchScale(Vector3.one * squishAmount, squishTime);
     }
@@ -106,17 +111,27 @@ public class ScoreManager : MonoBehaviour
     public void UpdateExternalLabels() {
         scoreTextGameOver.text = score.ToString("000000"); ;
         scoreTextWin.text = score.ToString("000000"); ;
-        mineralTextGameOver.text = $"{mineralAmount} / {totalMinerals}";
-        mineralTextWin.text = $"{mineralAmount} / {totalMinerals}";
+        mineralTextGameOver.text = $"{totalCollectedMinerals} / {totalMinerals}";
+        mineralTextWin.text = $"{totalCollectedMinerals} / {totalMinerals}";
+        SafeScore();
     }
 
     public void SafeScore()
     {
-        int highScore = PlayerPrefs.GetInt("highscore", 0);
+        int highScore = PlayerPrefs.GetInt("Highscore", 0);
         if(score > highScore)
         {
             highScore = score;
-            PlayerPrefs.SetInt("highscore", highScore);
+            PlayerPrefs.SetInt("Highscore", highScore);
+        }
+        int totalMineralsScore = PlayerPrefs.GetInt("TotalCollectedMinerals", 0);
+        if(totalCollectedMinerals > totalMineralsScore)
+        {
+            totalMineralsScore = totalCollectedMinerals;
+            PlayerPrefs.SetInt("TotalCollectedMinerals", totalMineralsScore);
+            PlayerPrefs.SetInt("TotalMinerals", totalMinerals);
+
+            Debug.Log($"{PlayerPrefs.GetInt("TotalCollectedMinerals")} / {PlayerPrefs.GetInt("TotalMinerals")}");
         }
     }
 }

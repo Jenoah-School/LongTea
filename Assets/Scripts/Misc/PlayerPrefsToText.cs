@@ -34,4 +34,9 @@ public class PlayerPrefsToText : MonoBehaviour
                 break;
         }
     }
+
+    public void SetRewardText()
+    {
+        textField.text = PlayerPrefs.GetInt("TotalCollectedMinerals", 0).ToString("00") + " / " + PlayerPrefs.GetInt("TotalMinerals", 0).ToString("00");
+    }
 }

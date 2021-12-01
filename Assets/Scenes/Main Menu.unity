@@ -5366,6 +5366,7 @@ GameObject:
   - component: {fileID: 329177961}
   - component: {fileID: 329177963}
   - component: {fileID: 329177962}
+  - component: {fileID: 329177964}
   m_Layer: 5
   m_Name: ResourcePanel
   m_TagString: Untagged
@@ -5432,6 +5433,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329177960}
   m_CullTransparentMesh: 1
+--- !u!114 &329177964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329177960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f953809a8f7942940bd57176f07f90c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textField: {fileID: 1605508717}
+  playerPrefsValue: 
+  playerPrefsType: 0
 --- !u!1 &335404565
 GameObject:
   m_ObjectHideFlags: 0
@@ -8992,6 +9008,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 329177964}
+        m_TargetAssemblyTypeName: PlayerPrefsToText, Assembly-CSharp
+        m_MethodName: SetRewardText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnHoverEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -9924,6 +9952,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 440362297, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8033981346406143761, guid: 95aab37761be5d14fb178d49cf2a65e6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -15613,6 +15645,7 @@ GameObject:
   - component: {fileID: 995963539}
   - component: {fileID: 995963541}
   - component: {fileID: 995963540}
+  - component: {fileID: 995963542}
   m_Layer: 5
   m_Name: ScorePanel
   m_TagString: Untagged
@@ -15679,6 +15712,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995963538}
   m_CullTransparentMesh: 1
+--- !u!114 &995963542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995963538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f953809a8f7942940bd57176f07f90c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textField: {fileID: 1070357528}
+  playerPrefsValue: Highscore
+  playerPrefsType: 1
 --- !u!1 &1000957482
 GameObject:
   m_ObjectHideFlags: 0
@@ -24534,7 +24582,6 @@ GameObject:
   - component: {fileID: 1721840565}
   - component: {fileID: 1721840564}
   - component: {fileID: 1721840562}
-  - component: {fileID: 1721840566}
   m_Layer: 5
   m_Name: MushroomBiome
   m_TagString: Untagged
@@ -24712,21 +24759,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1721840566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1721840560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f953809a8f7942940bd57176f07f90c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textField: {fileID: 1070357528}
-  playerPrefsValue: Highscore
-  playerPrefsType: 1
 --- !u!1 &1722236088
 GameObject:
   m_ObjectHideFlags: 0
