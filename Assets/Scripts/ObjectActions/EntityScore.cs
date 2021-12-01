@@ -15,4 +15,8 @@ public class EntityScore : MonoBehaviour
     {
         ScoreManager.instance.CollectMineral();
     }
+    public int GetScore()
+    {
+        return scoreAmount;
+    }
 }

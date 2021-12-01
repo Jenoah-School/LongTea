@@ -5297,6 +5297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.1
+  rotationSpeed: 3
   movementJoystick: {fileID: 0}
   rotationJoystick: {fileID: 0}
   model: {fileID: 8033981345301670717}
@@ -5480,7 +5481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74f34d181396fc49840a5a48117cddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderers: []
+  meshRenderers:
+  - {fileID: 7601842699180968986}
   colliders: []
   rootObject: {fileID: 8033981346406143761}
   disableCollisionOnGrow: 1
@@ -5490,7 +5492,7 @@ MonoBehaviour:
   squishTarget: 0.1
   shakeStrength: 0.5
   targetOffset: {x: 0, y: 30, z: 0}
-  colorTarget: {r: 1, g: 1, b: 1, a: 1}
+  colorTarget: {r: 2.828427, g: 0, b: 0, a: 1}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -5539,6 +5541,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
         m_MethodName: set_interactable
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlanetGeneration, Assembly-CSharp
+        m_MethodName: UnfreezeEnemies
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5608,6 +5622,18 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8033981346406143763}
+        m_TargetAssemblyTypeName: QuickAnimations, Assembly-CSharp
+        m_MethodName: FlashMaterial
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -5806,6 +5832,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: SafeScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  hasPartialImmunity: 1
+  cooldownTime: 1
 --- !u!114 &1931699594
 MonoBehaviour:
   m_ObjectHideFlags: 0

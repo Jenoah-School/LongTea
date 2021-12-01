@@ -10,7 +10,6 @@ public class GravityToPlanet : MonoBehaviour
     [SerializeField] private bool rotateToPlanet = true;
 
     private Rigidbody rb = null;
-    private bool hasInitialized = false;
 
     void Start()
     {

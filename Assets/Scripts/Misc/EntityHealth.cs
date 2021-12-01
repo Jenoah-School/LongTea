@@ -25,6 +25,7 @@ public class EntityHealth : MonoBehaviour
     public void SetHealth(float newHealth)
     {
         health = newHealth;
+        health = Mathf.Clamp(health, 0, startHealth);
         if (health <= 0)
         {
             OnDeath.Invoke();
@@ -43,6 +44,7 @@ public class EntityHealth : MonoBehaviour
         nextHitTime = Time.time + cooldownTime;
 
         health -= damageAmount;
+        health = Mathf.Clamp(health, 0, startHealth);
         if (health <= 0)
         {
             OnDeath.Invoke();

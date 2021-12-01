@@ -36,7 +36,6 @@ public class PlanetGeneration : MonoBehaviour
     private GameObject currentPlanet = null;
     private GameObject spawnPrevention = null;
 
-    private int spawnedResources = 0;
     private Transform player = null;
     private PlanetBiome currentBiome = null;
     private Noise noise;

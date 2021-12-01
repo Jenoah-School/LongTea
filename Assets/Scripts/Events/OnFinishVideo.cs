@@ -10,7 +10,6 @@ public class OnFinishVideo : MonoBehaviour
     [SerializeField] private UnityEvent onFinish;
     private VideoPlayer videoPlayer;
     private float videoLength = 0f;
-    private bool videoHasPlayed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +32,4 @@ public class OnFinishVideo : MonoBehaviour
         onFinish.Invoke();
         Debug.Log("Ad finished");
     }
-
-
 }

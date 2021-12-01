@@ -53,6 +53,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 44cbd6ead8c0e1d48aaac59ec76e6cd5, type: 2}
   resourceAmount: 4
   resources:
-  - {fileID: 11400000, guid: 3be07c4ca4026bd4a929ad3eca3c4ce9, type: 2}
+  - {fileID: 11400000, guid: 0948ca0908041f446af1a26de3fade54, type: 2}
+  - {fileID: 11400000, guid: 9515f0187f25b23468496954e595a090, type: 2}
   mustSpawnedItemAmount: 1
-  mustSpawnedItems: []
+  mustSpawnedItems:
+  - {fileID: 11400000, guid: dbc0a15871780e9428e328d4da16fa45, type: 2}
