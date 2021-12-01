@@ -29,6 +29,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     [SerializeField] private UnityEvent OnSuccesfulClick;
     [SerializeField] private UnityEvent OnHoverEnter;
     [SerializeField] private UnityEvent OnHoverExit;
+    [SerializeField] private bool isInteractable = true;
 
     private Vector2 startSize = new Vector2();
     private Vector2 startPosition = new Vector2();
@@ -98,7 +99,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (canvasGroup != null && !canvasGroup.interactable) return;
+        if (canvasGroup != null && !canvasGroup.interactable || !isInteractable) return;
         GrowToSize();
         PlayClickHoverSound();
         OnHoverEnter.Invoke();
@@ -106,7 +107,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (canvasGroup != null && !canvasGroup.interactable) return;
+        if (canvasGroup != null && !canvasGroup.interactable || !isInteractable) return;
         ReturnToStartSize();
         OnHoverExit.Invoke();
         isSelected = false;
@@ -115,7 +116,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     //Do the same as PointerEnter, but when using arrows/controller instead of mouse
     public void OnSelect(BaseEventData eventData)
     {
-        if (canvasGroup != null && !canvasGroup.interactable) return;
+        if (canvasGroup != null && !canvasGroup.interactable || !isInteractable) return;
         GrowToSize();
         PlayClickHoverSound();
         OnHoverEnter.Invoke();
@@ -125,7 +126,7 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     //Do the same as PointerExit, but when using arrows/controller instead of mouse
     public void OnDeselect(BaseEventData eventData)
     {
-        if (canvasGroup != null && !canvasGroup.interactable) return;
+        if (canvasGroup != null && !canvasGroup.interactable || !isInteractable) return;
         ReturnToStartSize();
         OnHoverExit.Invoke();
         isSelected = false;
@@ -133,20 +134,20 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (canvasGroup != null && !canvasGroup.interactable) return;
+        if (canvasGroup != null && !canvasGroup.interactable || !isInteractable) return;
         PlayClickUpSound();
         if (isSelected) OnSuccesfulClick.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (canvasGroup != null && !canvasGroup.interactable) return;
+        if (canvasGroup != null && !canvasGroup.interactable || !isInteractable) return;
         PlayClickDownSound();
     }
 
     public void OnSubmit(BaseEventData eventData)
     {
-        if (canvasGroup != null && !canvasGroup.interactable) return;
+        if (canvasGroup != null && !canvasGroup.interactable || !isInteractable) return;
         OnSuccesfulClick.Invoke();
     }
 

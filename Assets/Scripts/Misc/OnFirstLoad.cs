@@ -6,14 +6,18 @@ using UnityEngine.Events;
 public class OnFirstLoad : MonoBehaviour
 {
     [SerializeField] private UnityEvent firstLoad;
+    [SerializeField] private UnityEvent notFirstLoad;
 
-    // Start is called before the first frame update
-    void Start()
+    public void ExecuteAction()
     {
         if (!PlayerPrefs.HasKey("firstLoad"))
         {
             firstLoad.Invoke();
             PlayerPrefs.SetInt("firstLoad", 1);
+        }
+        else
+        {
+            notFirstLoad.Invoke();
         }
     }
 }

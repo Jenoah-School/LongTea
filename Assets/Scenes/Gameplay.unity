@@ -420,9 +420,6 @@ MonoBehaviour:
   mineralTextWin: {fileID: 1162830937}
   squishTime: 0.4
   squishAmount: 0.2
-  OnMaxScore:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &235229143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,6 +1566,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 450419261, guid: e61999812890cef418375fc0b79e923b, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 474038079, guid: e61999812890cef418375fc0b79e923b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 809743823, guid: e61999812890cef418375fc0b79e923b, type: 3}

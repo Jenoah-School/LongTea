@@ -23,11 +23,6 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private float squishTime = 0.4f;
     [SerializeField] private float squishAmount = 0.1f;
 
-    [Header("Events")]
-    [SerializeField] private UnityEvent OnMaxScore;
-
-    private bool maxScoreReached = false;
-
     private void Awake()
     {
         instance = this;
@@ -43,34 +38,29 @@ public class ScoreManager : MonoBehaviour
     {
         score = newScore;
         UpdateScoreLabelAnimated();
-        CheckScore();
     }
 
     public void SetMineralCount(int newMineralScore)
     {
         mineralAmount = newMineralScore;
-        UpdateScoreLabelAnimated();
-        CheckScore();
+        UpdateMineralLabelAnimated();
     }
 
     public void SetTotalMinerals(int newTotalScore)
     {
         totalMinerals = newTotalScore;
         UpdateMineralLabel();
-        CheckScore();
     }
     public void IncreaseTotalMinerals(int incrementAmount)
     {
         totalMinerals += incrementAmount;
         UpdateMineralLabel();
-        CheckScore();
     }
 
     public void IncreaseScore(int incrementAmount)
     {
         score += incrementAmount;
         UpdateScoreLabelAnimated();
-        CheckScore();
     }
 
     public int GetTotalMinerals()
@@ -111,15 +101,6 @@ public class ScoreManager : MonoBehaviour
         mineralText.text = $"{mineralAmount} / {totalMinerals}";
         mineralText.DOComplete();
         mineralText.rectTransform.DOPunchScale(Vector3.one * squishAmount, squishTime);
-    }
-
-    public void CheckScore()
-    {
-        if(!maxScoreReached && score >= totalMinerals)
-        {
-            OnMaxScore.Invoke();
-            maxScoreReached = true;
-        }
     }
 
     public void UpdateExternalLabels() {

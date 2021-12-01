@@ -52,7 +52,6 @@ public class PlanetGeneration : MonoBehaviour
 
         if (planetBiomes.Count <= 0) return;
         currentBiome = planetBiomes[Random.Range(0, planetBiomes.Count)];
-        ScoreManager.instance.SetScore(0);
 
         placedResources.Clear();
     }
