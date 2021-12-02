@@ -9,12 +9,13 @@ using DG.Tweening;
 [RequireComponent(typeof(AudioSource))]
 public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, ISelectHandler, IDeselectHandler, ISubmitHandler
 {
+    public bool isInteractable = true;
+
     [Header("Animation")]
     [SerializeField] private float animationTime = .15f;
     [SerializeField, Range(0f, 4f)] private float widthMultiplier = 1.5f;
     [SerializeField, Range(0f, 4f)] private float heightMultiplier = 1f;
     [SerializeField] private bool moveFromCenter = true;
-    private CanvasGroup canvasGroup;
 
     [Header("Movement")]
     [SerializeField] private Vector2 targetPosition = Vector2.zero;
@@ -29,8 +30,8 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     [SerializeField] private UnityEvent OnSuccesfulClick;
     [SerializeField] private UnityEvent OnHoverEnter;
     [SerializeField] private UnityEvent OnHoverExit;
-    [SerializeField] private bool isInteractable = true;
 
+    private CanvasGroup canvasGroup;
     private Vector2 startSize = new Vector2();
     private Vector2 startPosition = new Vector2();
     private RectTransform rectTransform = null;
@@ -105,6 +106,12 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
         OnHoverEnter.Invoke();
         isSelected = true;
     }
+
+    public void SetInteractable(bool newState)
+    {
+        isInteractable = newState;
+    }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         if (canvasGroup != null && !canvasGroup.interactable || !isInteractable) return;
