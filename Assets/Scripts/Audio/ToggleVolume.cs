@@ -16,6 +16,10 @@ public class ToggleVolume : MonoBehaviour
     void Start()
     {
         targetLevel = PlayerPrefs.GetFloat(mixerName, 0f);
+        if(audioToggle != null)
+        {
+            audioToggle.isOn = targetLevel == 0f;
+        }
         Toggle();
     }
 
@@ -27,11 +31,13 @@ public class ToggleVolume : MonoBehaviour
     public void FadeIn()
     {
         StartCoroutine(FadeToTarget(targetLevel));
+        PlayerPrefs.SetFloat(mixerName, targetLevel);
     }
 
     public void FadeOut()
     {
         StartCoroutine(FadeToTarget(-80f));
+        PlayerPrefs.SetFloat(mixerName, -80f);
     }
 
     public void FadeToVolumeLevel(float volumeLevel)
