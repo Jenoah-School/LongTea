@@ -30,8 +30,8 @@ public class ToggleVolume : MonoBehaviour
 
     public void FadeIn()
     {
-        StartCoroutine(FadeToTarget(targetLevel));
-        PlayerPrefs.SetFloat(mixerName, targetLevel);
+        StartCoroutine(FadeToTarget(0f));
+        PlayerPrefs.SetFloat(mixerName, 0f);
     }
 
     public void FadeOut()
