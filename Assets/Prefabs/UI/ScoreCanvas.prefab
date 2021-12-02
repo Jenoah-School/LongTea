@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42d0e5f08425f74db1c505627afec39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highQuality: 0
+  highQuality: 1
   inverse: 0
 --- !u!225 &360786854422341496
 CanvasGroup:

@@ -18,14 +18,19 @@ public class Billboard : MonoBehaviour
     {
         if (highQuality)
         {
+            Vector3 relativePos;
+
             if (inverse)
             {
-                transform.rotation = cam.rotation * Quaternion.Inverse(originalRotation);
+                relativePos = cam.position - transform.position;
             }
             else
             {
-                transform.rotation = cam.rotation * originalRotation;
+                relativePos = transform.position - cam.position;
             }
+
+            Quaternion rotation = Quaternion.LookRotation(relativePos, cam.up);
+            transform.rotation = rotation;
         }
         else
         {
