@@ -27,9 +27,9 @@ public class UIAnimations : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     [SerializeField] private AudioClip fullClickSound = null;
 
     [Header("Actions")]
-    [SerializeField] private UnityEvent OnSuccesfulClick;
-    [SerializeField] private UnityEvent OnHoverEnter;
-    [SerializeField] private UnityEvent OnHoverExit;
+    public UnityEvent OnSuccesfulClick;
+    public UnityEvent OnHoverEnter;
+    public UnityEvent OnHoverExit;
 
     private CanvasGroup canvasGroup;
     private Vector2 startSize = new Vector2();
